@@ -35,14 +35,143 @@
 
         <activity
             android:name=".ui.splash.SplashActivity"
+            android:exported="false"
+            android:theme="@style/Theme.CRMSistems.Splash" />
+
+        <!-- Входы в приложение с разными иконками: включён ровно один, его и
+             показывает лаунчер. Переключает экран «Мои магазины» → «Иконка
+             приложения» (util/AppIcons.java). -->
+        <activity-alias
+            android:name=".LauncherStore"
+            android:enabled="true"
             android:exported="true"
-            android:theme="@style/Theme.CRMSistems.Splash">
+            android:icon="@mipmap/ic_launcher"
+            android:roundIcon="@mipmap/ic_launcher_round"
+            android:targetActivity=".ui.splash.SplashActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
-        </activity>
+        </activity-alias>
+        <activity-alias
+            android:name=".LauncherFlowers"
+            android:enabled="false"
+            android:exported="true"
+            android:icon="@mipmap/ic_launcher_flowers"
+            android:roundIcon="@mipmap/ic_launcher_flowers_round"
+            android:targetActivity=".ui.splash.SplashActivity">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity-alias>
+        <activity-alias
+            android:name=".LauncherFood"
+            android:enabled="false"
+            android:exported="true"
+            android:icon="@mipmap/ic_launcher_food"
+            android:roundIcon="@mipmap/ic_launcher_food_round"
+            android:targetActivity=".ui.splash.SplashActivity">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity-alias>
+        <activity-alias
+            android:name=".LauncherGrocery"
+            android:enabled="false"
+            android:exported="true"
+            android:icon="@mipmap/ic_launcher_grocery"
+            android:roundIcon="@mipmap/ic_launcher_grocery_round"
+            android:targetActivity=".ui.splash.SplashActivity">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity-alias>
+        <activity-alias
+            android:name=".LauncherClothes"
+            android:enabled="false"
+            android:exported="true"
+            android:icon="@mipmap/ic_launcher_clothes"
+            android:roundIcon="@mipmap/ic_launcher_clothes_round"
+            android:targetActivity=".ui.splash.SplashActivity">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity-alias>
+        <activity-alias
+            android:name=".LauncherAuto"
+            android:enabled="false"
+            android:exported="true"
+            android:icon="@mipmap/ic_launcher_auto"
+            android:roundIcon="@mipmap/ic_launcher_auto_round"
+            android:targetActivity=".ui.splash.SplashActivity">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity-alias>
+        <activity-alias
+            android:name=".LauncherBuild"
+            android:enabled="false"
+            android:exported="true"
+            android:icon="@mipmap/ic_launcher_build"
+            android:roundIcon="@mipmap/ic_launcher_build_round"
+            android:targetActivity=".ui.splash.SplashActivity">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity-alias>
+        <activity-alias
+            android:name=".LauncherTech"
+            android:enabled="false"
+            android:exported="true"
+            android:icon="@mipmap/ic_launcher_tech"
+            android:roundIcon="@mipmap/ic_launcher_tech_round"
+            android:targetActivity=".ui.splash.SplashActivity">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity-alias>
+        <activity-alias
+            android:name=".LauncherPets"
+            android:enabled="false"
+            android:exported="true"
+            android:icon="@mipmap/ic_launcher_pets"
+            android:roundIcon="@mipmap/ic_launcher_pets_round"
+            android:targetActivity=".ui.splash.SplashActivity">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity-alias>
+        <activity-alias
+            android:name=".LauncherCoffee"
+            android:enabled="false"
+            android:exported="true"
+            android:icon="@mipmap/ic_launcher_coffee"
+            android:roundIcon="@mipmap/ic_launcher_coffee_round"
+            android:targetActivity=".ui.splash.SplashActivity">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity-alias>
+
 
         <!-- singleTop: нажатие на уведомление о заказе возвращает в уже открытое
              приложение, а не поднимает второй экземпляр главного экрана. -->

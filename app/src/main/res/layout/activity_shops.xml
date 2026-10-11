@@ -56,6 +56,27 @@
                 android:icon="@drawable/ic_add" />
 
             <com.google.android.material.button.MaterialButton
+                android:id="@+id/appIcon"
+                style="@style/Widget.Material3.Button.OutlinedButton"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="16dp"
+                android:layout_marginTop="4dp"
+                android:layout_marginEnd="16dp"
+                android:text="@string/app_icon_title" />
+
+            <TextView
+                android:id="@+id/appIconHint"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="16dp"
+                android:layout_marginTop="4dp"
+                android:layout_marginEnd="16dp"
+                android:text="@string/app_icon_hint"
+                android:textColor="?android:attr/textColorSecondary"
+                android:textSize="12sp" />
+
+            <com.google.android.material.button.MaterialButton
                 android:id="@+id/deploy"
                 style="@style/Widget.Material3.Button.OutlinedButton"
                 android:layout_width="match_parent"

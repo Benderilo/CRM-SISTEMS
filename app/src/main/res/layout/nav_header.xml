@@ -12,6 +12,7 @@
     android:paddingBottom="20dp">
 
     <ImageView
+        android:id="@+id/headerIcon"
         android:layout_width="52dp"
         android:layout_height="52dp"
         android:background="@drawable/shape_circle"

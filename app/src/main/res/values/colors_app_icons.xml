@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Фоны иконок приложения на выбор (экран «Мои магазины» → «Иконка приложения»). -->
+<resources>
+    <color name="app_icon_store">#1F4FA3</color>
+    <color name="app_icon_flowers">#D81B60</color>
+    <color name="app_icon_food">#E65100</color>
+    <color name="app_icon_grocery">#2E7D32</color>
+    <color name="app_icon_clothes">#6A1B9A</color>
+    <color name="app_icon_auto">#37474F</color>
+    <color name="app_icon_build">#795548</color>
+    <color name="app_icon_tech">#00838F</color>
+    <color name="app_icon_pets">#EF6C00</color>
+    <color name="app_icon_coffee">#4E342E</color>
+</resources>

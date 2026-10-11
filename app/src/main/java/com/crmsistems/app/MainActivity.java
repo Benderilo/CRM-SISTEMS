@@ -26,6 +26,7 @@ import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
 
+import com.crmsistems.app.data.AppDatabase;
 import com.crmsistems.app.databinding.ActivityMainBinding;
 import com.crmsistems.app.net.SyncManager;
 import com.crmsistems.app.ui.analytics.AnalyticsFragment;
@@ -43,6 +44,7 @@ import com.crmsistems.app.ui.sync.ServerSettingsActivity;
 import com.crmsistems.app.ui.week.WeekPickActivity;
 import com.crmsistems.app.util.NetworkMonitor;
 import com.crmsistems.app.util.Prefs;
+import com.crmsistems.app.util.ShopBranding;
 import com.crmsistems.app.util.Shops;
 import com.crmsistems.app.util.Ui;
 
@@ -88,6 +90,8 @@ public class MainActivity extends AppCompatActivity {
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        // Открыли с ярлыка другого магазина — сначала переключаемся на него.
+        if (openShopFromShortcut(getIntent())) return;
         binding = ActivityMainBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
 
@@ -152,10 +156,24 @@ public class MainActivity extends AppCompatActivity {
                 .show();
     }
 
+    /**
+     * Ярлык магазина на рабочем столе несёт номер магазина. Если открыт
+     * другой — переключаемся (с перезапуском, как в «Моих магазинах»).
+     */
+    private boolean openShopFromShortcut(Intent intent) {
+        int want = intent.getIntExtra(ShopBranding.EXTRA_SHOP_ID, 0);
+        if (want == 0 || want == Shops.activeId(this) || Shops.find(this, want) == null) return false;
+        AppDatabase.reset();
+        Shops.setActive(this, want);
+        ShopsActivity.restart(this, false);
+        return true;
+    }
+
     /** Нажали на уведомление, когда приложение уже открыто, — переходим к заказам. */
     @Override
     protected void onNewIntent(@NonNull Intent intent) {
         super.onNewIntent(intent);
+        if (openShopFromShortcut(intent)) return;
         setIntent(intent);
         if (intent.getBooleanExtra(EXTRA_OPEN_ORDERS, false)) select(TAG_SALES, true);
     }
@@ -176,10 +194,27 @@ public class MainActivity extends AppCompatActivity {
         TextView title = header.findViewById(R.id.headerTitle);
         TextView subtitle = header.findViewById(R.id.headerSubtitle);
         title.setText(Shops.active(this).name);
+        showLogo(header.findViewById(R.id.headerIcon));
         String company = Prefs.company(this);
         subtitle.setText(company.isEmpty() ? getString(R.string.shops_header_hint) : company);
 
         autoSync();
+    }
+
+    /** Логотип магазина в шапке меню, если его выбрали; иначе — значок по умолчанию. */
+    private void showLogo(android.widget.ImageView icon) {
+        android.graphics.Bitmap logo = ShopBranding.logo(this, Shops.activeId(this));
+        icon.setClipToOutline(true);
+        if (logo != null) {
+            icon.setImageBitmap(logo);
+            icon.setImageTintList(null);
+            icon.setPadding(0, 0, 0, 0);
+            icon.setScaleType(android.widget.ImageView.ScaleType.CENTER_CROP);
+        } else {
+            icon.setImageResource(R.drawable.ic_analytics);
+            int pad = Ui.dp(this, 12);
+            icon.setPadding(pad, pad, pad, pad);
+        }
     }
 
     /** Один раз за запуск — тихо подтянуть изменения с сайта и отдать свои. */
