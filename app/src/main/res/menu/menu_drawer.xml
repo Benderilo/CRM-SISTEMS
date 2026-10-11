@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <group android:checkableBehavior="single">
+        <item
+            android:id="@+id/nav_products"
+            android:icon="@drawable/ic_products"
+            android:title="@string/nav_products" />
+        <item
+            android:id="@+id/nav_sales"
+            android:icon="@drawable/ic_sales"
+            android:title="@string/nav_sales" />
+        <item
+            android:id="@+id/nav_clients"
+            android:icon="@drawable/ic_clients"
+            android:title="@string/nav_clients" />
+        <item
+            android:id="@+id/nav_analytics"
+            android:icon="@drawable/ic_analytics"
+            android:title="@string/nav_analytics" />
+        <item
+            android:id="@+id/nav_expenses"
+            android:icon="@drawable/ic_expenses"
+            android:title="@string/nav_expenses" />
+        <item
+            android:id="@+id/nav_settings"
+            android:icon="@drawable/ic_settings"
+            android:title="@string/nav_settings" />
+    </group>
+
+    <item android:title="@string/nav_site">
+        <menu>
+            <group android:checkableBehavior="single">
+                <item
+                    android:id="@+id/nav_shops"
+                    android:icon="@drawable/ic_products"
+                    android:title="@string/shops_title" />
+                <item
+                    android:id="@+id/nav_deploy"
+                    android:icon="@drawable/ic_backup"
+                    android:title="@string/deploy_title" />
+                <item
+                    android:id="@+id/nav_server"
+                    android:icon="@drawable/ic_settings"
+                    android:title="@string/server_title" />
+                <item
+                    android:id="@+id/nav_contacts"
+                    android:icon="@drawable/ic_phone"
+                    android:title="@string/nav_contacts" />
+                <item
+                    android:id="@+id/nav_bot"
+                    android:icon="@drawable/ic_link"
+                    android:title="@string/nav_bot" />
+                <item
+                    android:id="@+id/nav_week"
+                    android:icon="@drawable/ic_calendar"
+                    android:title="@string/nav_week" />
+            </group>
+        </menu>
+    </item>
+
+    <item android:title="@string/nav_more">
+        <menu>
+            <item
+                android:id="@+id/nav_about"
+                android:icon="@drawable/ic_info"
+                android:title="@string/nav_about" />
+        </menu>
+    </item>
+</menu>

@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="black">#FF000000</color>
+    <color name="white">#FFFFFFFF</color>
+
+    <!-- Фирменная палитра -->
+    <color name="brand_primary">#1B5FD9</color>
+    <color name="brand_primary_dark">#0B3D96</color>
+    <color name="brand_primary_light">#A8C4FF</color>
+    <color name="brand_secondary">#00875A</color>
+    <color name="brand_tertiary">#7A5AF8</color>
+
+    <!-- Зелёный кнопки звонка: узнаваемый «телефонный» цвет, одинаковый
+         в светлой и тёмной теме — по нему кнопку находят не читая. -->
+    <color name="call_green">#1E9E52</color>
+    <!-- Синий кнопки «Маршрут» рядом со звонком — тоже одинаковый в обеих темах. -->
+    <color name="map_blue">#1B5FD9</color>
+
+    <!-- Смысловые цвета аналитики -->
+    <color name="income">#00A37A</color>
+    <color name="expense">#E5484D</color>
+    <color name="profit">#2F6BED</color>
+    <color name="warning">#E8A33D</color>
+
+    <!-- Неоновая вывеска на заставке -->
+    <color name="neon_background">#06070B</color>
+    <color name="neon_cyan">#35E8FF</color>
+    <color name="neon_pink">#FF2E9A</color>
+    <color name="neon_amber">#FFC53D</color>
+    <!-- Тёмно-синий для всех букв вывески -->
+    <color name="neon_blue">#1A3CD6</color>
+
+    <!-- Цвета карточки по статусу заказа: заливка и текст к ней. Заливка
+         нарочно насыщенная: бледные пастели терялись на белом фоне списка.
+         Тёмные варианты лежат в values-night/colors.xml. -->
+    <color name="status_new_bg">#FFFFFF</color>
+    <color name="status_new_fg">#2E3338</color>
+    <color name="status_accepted_bg">#C2D6FF</color>
+    <color name="status_accepted_fg">#0D3680</color>
+    <color name="status_packing_bg">#FFC9A3</color>
+    <color name="status_packing_fg">#7A3200</color>
+    <color name="status_delivery_bg">#FFCC00</color>
+    <color name="status_delivery_fg">#4A3900</color>
+    <color name="status_done_bg">#B8EBCF</color>
+    <color name="status_done_fg">#03583B</color>
+    <color name="status_canceled_bg">#FFA9A0</color>
+    <color name="status_canceled_fg">#800005</color>
+
+    <!-- Цвет карточки клиента по сегменту: бледная заливка и текст к ней.
+         Видно с одного взгляда, кто перед тобой — постоянный или проблемный.
+         Тёмные варианты лежат в values-night/colors.xml. -->
+    <color name="segment_new_bg">#DDE8FF</color>
+    <color name="segment_new_fg">#12428F</color>
+    <color name="segment_regular_bg">#D9F2E5</color>
+    <color name="segment_regular_fg">#076A4A</color>
+    <color name="segment_vip_bg">#F3DFA2</color>
+    <color name="segment_vip_fg">#6A4E00</color>
+    <color name="segment_sleeping_bg">#FBF3D6</color>
+    <color name="segment_sleeping_fg">#8C7A3A</color>
+    <color name="segment_problem_bg">#FFDFDD</color>
+    <color name="segment_problem_fg">#93000A</color>
+    <!-- Сегмент не заполнен или незнакомый — карточка остаётся спокойной. -->
+    <color name="segment_none_bg">#F2F2F5</color>
+    <color name="segment_none_fg">#4A4A55</color>
+
+    <!-- Палитра графиков -->
+    <color name="chart_1">#2F6BED</color>
+    <color name="chart_2">#00A37A</color>
+    <color name="chart_3">#F2A23A</color>
+    <color name="chart_4">#A05CE6</color>
+    <color name="chart_5">#E5556B</color>
+    <color name="chart_6">#16B8C7</color>
+</resources>

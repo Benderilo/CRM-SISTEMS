@@ -1,0 +1,81 @@
+{{define "content"}}
+{{template "ticker" .Data.News}}
+
+<section class="hero">
+  <div class="wrap">
+    <span class="eyebrow">{{.Site.Tagline}}</span>
+    <h1>{{.Site.Title}}</h1>
+    <p>{{.Site.Hero}}</p>
+    <div class="hero-actions">
+      <a class="btn btn-gold" href="/catalog">Смотреть каталог</a>
+      <a class="btn btn-ghost" href="/contacts">Доставка и оплата</a>
+    </div>
+    <div class="hero-facts">
+      <div class="hero-fact"><strong>{{.Data.Total}}</strong><span>позиций в каталоге</span></div>
+    </div>
+  </div>
+</section>
+
+{{if .Data.Categories}}
+<section class="section" style="padding-bottom:0">
+  <div class="wrap">
+    <div class="section-head">
+      <div>
+        <h2>Разделы каталога</h2>
+        <p>Выберите раздел — или посмотрите весь каталог целиком</p>
+      </div>
+    </div>
+    <div class="cats">
+      {{range .Data.Categories}}
+      <a class="cat-chip" href="/catalog?cat={{.}}">{{.}}</a>
+      {{end}}
+      <a class="cat-chip" href="/catalog">Всё сразу →</a>
+    </div>
+  </div>
+</section>
+{{end}}
+
+<section class="section">
+  <div class="wrap">
+    <div class="section-head">
+      <div>
+        <h2>Берут чаще всего</h2>
+        <p>То, что расходится в первую очередь</p>
+      </div>
+      <a class="btn btn-outline btn-sm" href="/catalog">Весь каталог</a>
+    </div>
+
+    {{if .Data.Popular}}
+    <div class="grid">
+      {{range .Data.Popular}}{{template "productcard" card . $}}{{end}}
+    </div>
+    {{else}}
+    <div class="empty">
+      <div class="empty-icon">🥟</div>
+      <h3>Каталог пока пуст</h3>
+      <p>Товары появятся здесь сразу после того, как их добавят в панели управления.</p>
+    </div>
+    {{end}}
+  </div>
+</section>
+
+<section class="section" style="background:var(--paper);border-top:1px solid var(--line);border-bottom:1px solid var(--line)">
+  <div class="wrap">
+    <div class="section-head"><div><h2>Как это работает</h2></div></div>
+    <div class="grid" style="grid-template-columns:repeat(auto-fit,minmax(230px,1fr))">
+      <div class="panel" style="border:0;padding:0">
+        <h3>1. Собираете заказ</h3>
+        <p class="lead">Выбираете товары в каталоге и складываете в корзину. Регистрация — по номеру телефона, занимает минуту.</p>
+      </div>
+      <div class="panel" style="border:0;padding:0">
+        <h3>2. Мы подтверждаем</h3>
+        <p class="lead">Перезваниваем, уточняем состав и время. Статус заказа видно в личном кабинете.</p>
+      </div>
+      <div class="panel" style="border:0;padding:0">
+        <h3>3. Привозим</h3>
+        <p class="lead">Доставка по городу или самовывоз. Оплата наличными или картой при получении.</p>
+      </div>
+    </div>
+  </div>
+</section>
+{{end}}

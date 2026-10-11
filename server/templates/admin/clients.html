@@ -1,0 +1,57 @@
+{{define "content"}}
+<div class="page-head">
+  <div>
+    <h1>Клиенты</h1>
+    <p>Всего: {{len .Data.Rows}}</p>
+  </div>
+  <form method="get" action="/admin/clients" style="display:flex;gap:8px">
+    <input type="search" name="q" value="{{.Data.Search}}" placeholder="Имя, телефон или почта…">
+    <button class="btn btn-outline btn-sm" type="submit">Найти</button>
+  </form>
+</div>
+
+<div class="abox abox-flush">
+  {{if .Data.Rows}}
+  <div class="table-scroll">
+    <table class="data">
+      <thead>
+        <tr>
+          <th></th><th>Клиент</th><th>Телефон</th><th>Почта</th>
+          <th>Сегмент</th><th class="num">Заказов</th><th class="num">На сумму</th><th></th>
+        </tr>
+      </thead>
+      <tbody>
+        {{range .Data.Rows}}
+        <tr {{if or .Client.Archived .Client.Blocked}}style="opacity:.5"{{end}}>
+          <td>
+            <div class="thumb-sm" style="border-radius:50%;
+                 background:linear-gradient(150deg,#8f2f24,#6d2019);color:#fff;font-size:14px">
+              {{.Client.Initials}}
+            </div>
+          </td>
+          <td>
+            <a href="/admin/clients/{{.Client.ID}}"><strong>{{.Client.FullName}}</strong></a>
+            {{if .Client.Blocked}}<span class="chip chip-canceled">Заблокирован</span>{{end}}
+            {{if .Client.Archived}}<span class="chip">В архиве</span>{{end}}
+            {{if .Client.Address}}<div class="small muted">{{.Client.Address}}</div>{{end}}
+          </td>
+          <td style="white-space:nowrap" data-label="Телефон"><a href="tel:{{.Client.Phone}}">{{phone .Client.Phone}}</a></td>
+          <td class="small" data-label="Почта">{{if .Client.Email}}{{.Client.Email}}{{else}}<span class="muted">—</span>{{end}}</td>
+          <td class="small" data-label="Сегмент">{{.Client.Segment}}</td>
+          <td class="num" data-label="Заказов">{{.Count}}</td>
+          <td class="num" data-label="На сумму"><strong>{{money .Total}}</strong></td>
+          <td class="num"><a class="btn btn-outline btn-sm" href="/admin/clients/{{.Client.ID}}">Открыть</a></td>
+        </tr>
+        {{end}}
+      </tbody>
+    </table>
+  </div>
+  {{else}}
+  <div class="empty" style="padding:44px 20px">
+    <div class="empty-icon">👥</div>
+    <h3>Клиентов пока нет</h3>
+    <p>Здесь появятся все, кто зарегистрировался на сайте или оформил заказ.</p>
+  </div>
+  {{end}}
+</div>
+{{end}}

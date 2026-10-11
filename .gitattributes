@@ -1,0 +1,3 @@
+# Скрипты выполняются на Linux-сервере — только переводы строк LF.
+*.sh text eol=lf
+gradlew text eol=lf

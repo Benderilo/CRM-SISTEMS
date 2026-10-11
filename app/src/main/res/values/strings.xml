@@ -1,0 +1,438 @@
+<resources>
+    <string name="app_name">CRM SISTEMS</string>
+
+    <!-- Навигация -->
+    <string name="nav_products">Товары</string>
+    <string name="nav_clients">Клиенты</string>
+    <string name="nav_analytics">Аналитика</string>
+    <string name="nav_settings">Настройки</string>
+    <string name="nav_sales">Заказы</string>
+    <string name="nav_expenses">Расходы</string>
+    <string name="nav_backup">Экспорт и импорт</string>
+    <string name="nav_about">О программе</string>
+    <string name="nav_more">Дополнительно</string>
+    <string name="open_menu">Открыть меню</string>
+    <string name="close">Закрыть</string>
+
+    <!-- Общее -->
+    <string name="search_hint">Поиск</string>
+    <string name="save">Сохранить</string>
+    <string name="cancel">Отмена</string>
+    <string name="delete">Удалить</string>
+    <string name="edit">Изменить</string>
+    <string name="add">Добавить</string>
+    <string name="ok">Готово</string>
+    <string name="empty_title">Пока пусто</string>
+    <string name="required_field">Обязательное поле</string>
+    <string name="saved">Сохранено</string>
+    <string name="deleted">Удалено</string>
+    <string name="undo">Вернуть</string>
+    <string name="confirm_delete">Удалить безвозвратно?</string>
+
+    <!-- Товары -->
+    <string name="add_product">Добавить товар</string>
+    <string name="product_card">Карточка товара</string>
+    <string name="product_name">Наименование</string>
+    <string name="product_sku">Артикул (SKU)</string>
+    <string name="product_category">Категория</string>
+    <string name="product_unit">Ед. изм.</string>
+    <string name="product_price">Цена продажи</string>
+    <string name="product_cost">Себестоимость</string>
+    <string name="product_stock">Остаток</string>
+    <string name="product_min_stock">Мин. остаток</string>
+    <string name="product_barcode">Штрихкод</string>
+    <string name="product_description">Описание</string>
+    <string name="product_archived">В архиве</string>
+    <string name="products_empty">Добавьте первый товар кнопкой «+»</string>
+    <string name="low_stock">Заканчивается</string>
+
+    <!-- Клиенты -->
+    <string name="add_client">Добавить клиента</string>
+    <string name="client_card">Карточка клиента</string>
+    <string name="client_name">ФИО / название</string>
+    <string name="client_phone">Телефон</string>
+    <string name="client_email">E-mail</string>
+    <string name="client_company">Компания</string>
+    <string name="client_address">Адрес</string>
+    <string name="client_segment">Сегмент</string>
+    <string name="client_source">Источник</string>
+    <string name="client_tags">Метки (через запятую)</string>
+    <string name="client_note">Заметки</string>
+    <string name="client_birthday">День рождения</string>
+    <string name="clients_empty">Добавьте первого клиента кнопкой «+»</string>
+    <string name="client_blocked">Заблокирован</string>
+    <string name="client_password_action">Пароль от кабинета</string>
+    <string name="client_password_title">Новый пароль для сайта</string>
+    <string name="client_password_hint">Покупатель забыл пароль от личного кабинета? Задайте новый и продиктуйте по телефону — входить он будет по своему номеру.</string>
+    <string name="client_password_field">Пароль</string>
+    <string name="client_password_note">Оставьте поле пустым — сайт придумает пароль сам. Открытые сессии покупателя закроются.</string>
+    <string name="client_password_set">Задать</string>
+    <string name="client_password_done">Новый пароль: %1$s</string>
+    <string name="client_password_done_hint">Продиктуйте его покупателю. Логин прежний — номер телефона.</string>
+    <string name="client_password_copy">Скопировать</string>
+    <string name="client_password_copied">Пароль скопирован</string>
+    <string name="client_password_offline">Пароль меняется на сайте — нужен интернет</string>
+    <string name="client_password_no_server">Клиент ещё не выгружен на сайт — сначала синхронизируйте данные</string>
+    <string name="client_blocked_hint">Заблокированный клиент не может войти на сайт и оформить заказ</string>
+
+    <!-- Заказы -->
+    <string name="add_sale">Оформить заказ</string>
+    <string name="sale_card">Заказ</string>
+    <string name="sale_client">Клиент</string>
+    <string name="sale_product">Товар</string>
+    <string name="sale_qty">Количество</string>
+    <string name="sale_price">Цена за единицу</string>
+    <string name="sale_cost">Себестоимость за единицу</string>
+    <string name="sale_discount">Скидка, сумма</string>
+    <string name="sale_date">Дата</string>
+    <string name="sale_status">Статус</string>
+    <string name="sale_note">Комментарий</string>
+    <string name="sale_writeoff_note">Остаток уменьшится на проданное количество — и в телефоне, и на сайте</string>
+    <string name="sales_empty">Заказов пока нет</string>
+    <string name="search_order_hint">Поиск заказа</string>
+    <string name="order_filter_all">Все</string>
+    <string name="order_filter_done">Выполнено</string>
+    <string name="order_filter_active">В работе</string>
+    <string name="order_filter_canceled">Отменено</string>
+
+    <!-- Расходы -->
+    <string name="add_expense">Добавить расход</string>
+    <string name="expense_title">Назначение</string>
+    <string name="expense_category">Категория</string>
+    <string name="expense_amount">Сумма</string>
+    <string name="expenses_empty">Расходов пока нет</string>
+
+    <!-- Аналитика -->
+    <string name="period_week">Неделя</string>
+    <string name="period_month">Месяц</string>
+    <string name="period_quarter">Квартал</string>
+    <string name="period_year">Год</string>
+    <string name="period_all">Всё время</string>
+    <string name="kpi_revenue">Доход</string>
+    <string name="kpi_expense">Расход</string>
+    <string name="kpi_profit">Прибыль</string>
+    <string name="kpi_sales">Заказов</string>
+    <string name="kpi_clients">Клиентов</string>
+    <string name="kpi_products">Товаров</string>
+    <string name="kpi_avg_check">Средний чек</string>
+    <string name="kpi_pending">Ожидает оплаты</string>
+    <string name="kpi_site_orders">С сайта</string>
+    <string name="kpi_site_orders_revenue">Выручка с сайта</string>
+    <string name="kpi_stock_value">Склад по себестоимости</string>
+    <string name="kpi_products_stock">Товаров · склад</string>
+    <string name="app_tagline">Товары, заказы, клиенты</string>
+    <string name="chart_money_flow">Доходы и расходы по месяцам</string>
+    <string name="chart_sales_count">Количество заказов</string>
+    <string name="chart_top_products">Топ товаров по выручке</string>
+    <string name="chart_top_clients">Топ клиентов по выручке</string>
+    <string name="chart_expense_categories">Структура расходов</string>
+    <string name="chart_client_segments">Клиенты по сегментам</string>
+    <string name="chart_no_data">Нет данных за выбранный период</string>
+    <string name="legend_income">Доход</string>
+    <string name="legend_expense">Расход</string>
+
+    <!-- Настройки и обмен данными -->
+    <string name="settings_general">Основное</string>
+    <string name="settings_theme">Тема оформления</string>
+    <string name="settings_theme_system">Как в системе</string>
+    <string name="settings_theme_light">Светлая</string>
+    <string name="settings_theme_dark">Тёмная</string>
+    <string name="settings_currency">Валюта</string>
+    <string name="settings_company">Название компании</string>
+    <string name="settings_low_stock">Предупреждать о низком остатке</string>
+    <string name="settings_data">База данных</string>
+    <string name="export_xlsx">Выгрузить в Excel (.xlsx)</string>
+    <string name="export_xlsx_desc">Все таблицы одной книгой: товары, клиенты, заказы, расходы</string>
+    <string name="import_xlsx">Загрузить из Excel (.xlsx)</string>
+    <string name="import_xlsx_desc">Та же книга обратно: правите на компьютере — телефон подхватывает</string>
+    <string name="import_xlsx_confirm">Загрузить книгу «%1$s»?\n\nСтроки с тем же ID обновятся, новые добавятся. Ничего не удаляется.\n\nПеред загрузкой приложение сохранит резервную копию базы в «Загрузки».</string>
+    <string name="import_xlsx_result">Загружено: товаров %1$d, клиентов %2$d, заказов %3$d, расходов %4$d</string>
+    <string name="import_backup_making">Сохраняю резервную копию…</string>
+    <string name="import_backup_failed">Не удалось сохранить резервную копию: %1$s\n\nВсё равно загрузить данные из книги?</string>
+    <string name="data_more">Другие форматы</string>
+    <string name="data_more_desc">CSV по таблицам и полная резервная копия</string>
+    <string name="data_more_hide">Свернуть</string>
+    <string name="export_csv">Выгрузить в CSV</string>
+    <string name="export_csv_desc">Отдельный файл по выбранной таблице (открывается в Excel)</string>
+    <string name="import_csv">Загрузить из CSV</string>
+    <string name="import_csv_desc">Обновление по артикулу и телефону, новые строки добавляются</string>
+    <string name="backup_json">Резервная копия (JSON)</string>
+    <string name="backup_json_desc">Полная копия базы для переноса на другой телефон</string>
+    <string name="restore_json">Восстановить из копии</string>
+    <string name="restore_json_desc">Заменяет все текущие данные</string>
+    <string name="clear_orders">Очистить заказы</string>
+    <string name="clear_orders_desc">Удалить заказы на сайте: только выполненные или все</string>
+    <string name="clear_orders_choose">Какие заказы удалить?</string>
+    <string name="clear_orders_done">Только выполненные</string>
+    <string name="clear_orders_all">Все заказы</string>
+    <string name="clear_orders_warn_done">Выполненные заказы будут удалены с сайта и из приложения без возможности отмены.
+
+Остатки на складе не изменятся — товар покупателям уже отдан. Копию удалённых заказов сервер сохранит рядом с базой.</string>
+    <string name="clear_orders_warn_all">Будут удалены ВСЕ заказы — и выполненные, и те, что в работе.
+
+Остатки на складе не изменятся. Копию удалённых заказов сервер сохранит рядом с базой.</string>
+    <string name="clear_orders_confirm">Точно удалить? Отменить это будет нельзя.</string>
+    <string name="clear_orders_done_result">Удалено заказов: %1$d. Осталось: %2$d</string>
+    <string name="clear_data">Очистить базу</string>
+    <string name="clear_data_desc">Удаляет все записи без возможности отмены</string>
+    <string name="clear_warn1">Все товары, клиенты, заказы и расходы будут удалены. Перед этим приложение автоматически сохранит резервную копию в папку «Загрузки».</string>
+    <string name="clear_continue">Продолжить</string>
+    <string name="clear_warn2">Удалить всю базу без возможности отмены?\n\nРезервная копия сохранена:\n%1$s</string>
+    <string name="clear_backup_making">Делаем резервную копию…</string>
+    <string name="clear_done_with_backup">База очищена. Резервная копия: %1$s</string>
+    <string name="clear_backup_failed">Резервную копию создать не удалось: %1$s\n\nУдалить базу всё равно?</string>
+    <string name="export_done">Файл сохранён</string>
+    <string name="import_done">Импорт завершён</string>
+    <string name="operation_failed">Не удалось выполнить операцию</string>
+    <string name="choose_table">Выберите таблицу</string>
+    <string name="about_text">CRM SISTEMS — учёт товаров, клиентов, заказов и расходов для любого магазина.
+База хранится на телефоне; сайт, панель управления и бот MAX ставятся на ваш VPS прямо из приложения («Установка на сервер»). Магазинов может быть несколько — переключаются в «Мои магазины».
+Данные можно выгрузить в Excel/CSV и отредактировать на компьютере.</string>
+
+    <!-- Связь с сайтом магазина -->
+    <string name="nav_site">Сайт магазина</string>
+    <string name="server_title">Сайт магазина</string>
+    <string name="server_section_browser">Сайт и админ-панель</string>
+    <string name="server_section_connection">Подключение</string>
+    <string name="server_section_sync">Синхронизация</string>
+    <string name="server_section_admin">Панель управления сайтом</string>
+    <string name="server_url">Адрес сайта</string>
+    <string name="server_api_key">Ключ доступа</string>
+    <string name="server_api_key_hint">Ключ записывается сам при установке сервера. Вручную — файл /opt/crm/ИМЯ/crmshop.env на сервере, строка SHOP_API_KEY</string>
+    <string name="server_check">Проверить связь</string>
+    <string name="server_status_unknown">Связь ещё не проверялась</string>
+    <string name="server_status_ok">Связь есть. На сайте: товаров %1$d, клиентов %2$d, заказов %3$d</string>
+    <string name="server_sync_now">Синхронизировать сейчас</string>
+    <string name="server_never_synced">Ещё ни разу не синхронизировались</string>
+    <string name="server_last_sync">Последний обмен: %1$s</string>
+    <string name="server_sync_explain">Товары и клиенты из приложения уйдут на сайт, а данные сайта — включая заказы покупателей и остатки — вернутся в приложение.</string>
+    <string name="server_syncing">Обмен данными…</string>
+    <string name="server_admin_unknown">Логин администратора неизвестен</string>
+    <string name="server_admin_login">Администратор сайта: %1$s</string>
+    <string name="server_change_admin_password">Сменить логин и пароль админки</string>
+    <string name="server_open_orders">Открыть заказы с сайта</string>
+    <string name="server_not_configured">Сначала укажите адрес сайта и ключ доступа</string>
+
+    <!-- Встроенный браузер сайта и админки -->
+    <string name="web_open_site">Открыть сайт</string>
+    <string name="web_open_admin">Админ-панель сайта</string>
+    <string name="web_reset">Сбросить адреса</string>
+    <string name="web_buttons_hint">Адрес сайта, адрес админки и логин с паролем спрашиваются один раз и запоминаются. Сброс нужен, когда магазин переезжает на другой адрес или сменился пароль.</string>
+    <string name="web_site_url">Адрес сайта</string>
+    <string name="web_admin_url">Адрес админ-панели</string>
+    <string name="web_admin_login">Логин</string>
+    <string name="web_admin_pass">Пароль</string>
+    <string name="web_url_hint">Например: https://example.ru — без https тоже заработает</string>
+    <string name="web_admin_hint">Логин и пароль от страницы входа в админку. Сохраняются на телефоне и используются для автовхода.</string>
+    <string name="web_url_empty">Заполните все поля</string>
+    <string name="web_reset_confirm">Забыть адрес сайта, адрес админ-панели и сохранённые логин с паролем? Их спросят заново при следующем открытии.</string>
+    <string name="web_reset_done">Адреса сброшены</string>
+    <string name="web_refresh">Обновить</string>
+    <string name="web_open_external">Открыть в браузере</string>
+    <string name="web_error">Не удалось загрузить страницу. Проверьте адрес и подключение к интернету.</string>
+    <string name="web_retry">Повторить</string>
+    <string name="web_ssl_title">Небезопасное соединение</string>
+    <string name="web_ssl_message">Сертификат сайта %1$s не распознан. Продолжить?</string>
+    <string name="web_continue">Продолжить</string>
+    <string name="web_no_app">Не найдено приложение для этого действия</string>
+
+    <!-- Смена пароля администратора сайта -->
+    <string name="admin_pwd_title">Доступ в админку сайта</string>
+    <string name="admin_pwd_login">Логин</string>
+    <string name="admin_pwd_old">Текущий пароль</string>
+    <string name="admin_pwd_new">Новый пароль</string>
+    <string name="admin_pwd_new2">Повторите новый пароль</string>
+    <string name="admin_pwd_hint">Это пароль от страницы /admin на сайте. Минимум 8 символов. Текущий пароль спрашиваем, чтобы потерянный телефон не открыл доступ к магазину.</string>
+    <string name="admin_pwd_save">Сохранить</string>
+    <string name="admin_pwd_mismatch">Пароли не совпадают</string>
+    <string name="admin_pwd_short">Новый пароль короче 8 символов</string>
+    <string name="admin_pwd_need_old">Введите текущий пароль</string>
+    <string name="admin_pwd_done">Пароль изменён. На сайте придётся войти заново.</string>
+
+    <!-- Уведомления о новых заказах -->
+    <string name="channel_orders">Новые заказы</string>
+    <string name="channel_orders_desc">Сообщение приходит, когда с сайта приезжает заказ, которого ещё не было в приложении.</string>
+    <string name="new_order_title">Новый заказ %1$s</string>
+    <string name="new_orders_title">Новых заказов: %1$d</string>
+    <string name="new_orders_sum">На сумму %1$s</string>
+    <string name="new_order_unknown_buyer">Покупатель с сайта</string>
+    <string name="pending_orders_title">Ждут обработки: %1$d</string>
+    <string name="pending_order_hint">Смените статус, чтобы напоминание пропало</string>
+    <string name="settings_order_alerts">Сообщать о заказах с сайта</string>
+    <string name="settings_order_reminder">Напоминать каждые 15 минут</string>
+    <string name="settings_order_hint">Напоминание висит, пока заказ в статусе «Новый». Как только он уходит в работу, сообщение пропадает само.</string>
+
+    <!-- Заказы с сайта -->
+    <string name="orders_title">Заказы с сайта</string>
+    <string name="orders_empty">Заказов пока нет</string>
+    <string name="orders_empty_hint">Здесь появятся заказы, оформленные покупателями на сайте.</string>
+    <string name="orders_summary">Всего %1$d, новых %2$d, на сумму %3$s</string>
+    <string name="order_number">Заказ %1$s</string>
+    <string name="order_change_status">Сменить статус</string>
+    <string name="order_delete">Удалить заказ</string>
+    <string name="order_delete_confirm">Удалить заказ безвозвратно? Копия останется на сервере, но в приложении и на сайте его больше не будет. Товар, если он был списан, вернётся на склад.</string>
+    <string name="order_deleted">Заказ удалён</string>
+    <string name="order_delete_offline">Удалить заказ можно только при подключении к интернету</string>
+    <string name="order_status_saved">Статус обновлён</string>
+    <string name="order_status_queued">Сохранено офлайн — отправим при появлении интернета</string>
+    <string name="orders_offline_prefix">Нет связи — кэш телефона:</string>
+    <string name="orders_offline_empty">Нет связи, а кэш заказов пуст — список появится при подключении к интернету</string>
+    <string name="order_customer">Покупатель</string>
+    <string name="order_items">Состав заказа</string>
+    <string name="order_total">Итого</string>
+    <string name="order_profit">Прибыль</string>
+    <string name="order_delivery">Получение</string>
+    <string name="order_payment">Оплата</string>
+    <string name="order_comment">Комментарий</string>
+    <string name="client_mail">Написать на почту</string>
+    <string name="order_call">Позвонить</string>
+    <string name="order_call_number">Позвонить %1$s</string>
+    <string name="order_no_phone">Телефон не указан</string>
+    <string name="order_call_failed">На этом устройстве нет приложения для звонков</string>
+    <string name="order_map">Маршрут</string>
+    <string name="order_no_address">Адрес не указан</string>
+    <string name="order_map_failed">Не удалось открыть Яндекс Карты</string>
+    <string name="order_merged_hint">Заказы с одного номера сайт объединяет в один — здесь весь состав вместе.</string>
+    <string name="order_items_hint">Нажмите на позицию, чтобы изменить количество или убрать её</string>
+    <string name="order_item_qty">Количество</string>
+    <string name="order_item_hint">Можно дробное: 0,5 · 1,5. Сумма заказа пересчитается, а разница вернётся на склад.</string>
+    <string name="order_item_current">Сейчас %1$s %2$s × %3$s</string>
+    <string name="order_item_remove">Убрать</string>
+    <string name="order_item_remove_confirm">Убрать «%1$s» из заказа?</string>
+    <string name="order_item_saved">Состав заказа изменён</string>
+    <string name="order_item_bad_qty">Укажите количество больше нуля</string>
+    <string name="order_item_locked">Состав заказа можно менять только при подключении к интернету</string>
+    <string name="order_item_add">Добавить позицию</string>
+    <string name="order_item_add_ok">Добавить</string>
+    <string name="order_item_added">«%1$s» добавлен в заказ</string>
+    <string name="order_item_price">%1$s за %2$s · на складе %3$s</string>
+    <string name="order_item_no_products">Товары ещё не выгружены на сайт — сначала синхронизируйте их в разделе «Сайт магазина»</string>
+
+    <!-- Продажа из карточки клиента: позиции добавляются так же, как в заказе. -->
+    <string name="pick_product_stock">за %1$s · на складе %2$s</string>
+    <string name="sale_draft_title">Новая продажа</string>
+    <string name="sale_draft_save">Сохранить продажу</string>
+    <string name="sale_draft_hint">Нажмите на позицию, чтобы изменить количество или убрать её.</string>
+    <string name="sale_total">Итого</string>
+    <string name="sale_item_hint">Можно дробное: 0,5 · 1,5. Товар спишется со склада, а продажа уйдёт на сайт заказом.</string>
+    <string name="sale_item_added">«%1$s» добавлен в продажу</string>
+    <string name="sale_item_remove_confirm">Убрать «%1$s» из продажи?</string>
+    <string name="sale_no_products">Товаров пока нет — сначала заведите их в разделе «Товары»</string>
+    <string name="sale_saved">Продажа сохранена</string>
+    <string name="order_client_link">Привязать к клиенту</string>
+    <string name="order_client_linked">Заявка привязана к клиенту %1$s</string>
+    <string name="order_client_new">Создать клиента и привязать</string>
+    <string name="order_client_not_linked">Клиент сохранён, но сайт его пока не принял — заявка осталась непривязанной</string>
+    <string name="order_pick_client">Выбрать покупателя</string>
+    <string name="order_items_empty">Позиций пока нет — добавьте хотя бы одну</string>
+    <string name="order_no_clients">Клиентов пока нет — сначала заведите их в разделе «Клиенты»</string>
+    <string name="order_write_off_hint">Остаток уменьшится на проданное — и в телефоне, и на сайте. Заказ уйдёт на сайт одной записью.</string>
+
+    <!-- Бот MAX -->
+    <string name="nav_bot">Бот MAX</string>
+    <string name="bot_title">Бот MAX</string>
+    <string name="bot_section_token">Подключение</string>
+    <string name="bot_token">Токен бота</string>
+    <string name="bot_token_hint">Токен выдаёт @MasterBot в MAX при создании бота. Он хранится только на сервере.</string>
+    <string name="bot_token_saved">Токен задан: %1$s. Чтобы заменить — впишите новый и сохраните.</string>
+    <string name="bot_enabled">Бот включён</string>
+    <string name="bot_call_words">Слова-обращения в группе</string>
+    <string name="bot_call_words_hint">Через запятую: бот, Маруся. В группе бот отвечает, только если в сообщении есть одно из этих слов (падежи понимает: «Марусе, каталог»). В личном чате обращение не нужно.</string>
+    <string name="bot_section_restart">Перезапуск</string>
+    <string name="bot_restart_hint">MAX иногда перестаёт присылать сообщения: связь есть, ошибок нет, а бот молчит. Раз в сутки сервер поднимает опрос заново — это лечит такие зависания сам, без вашего участия. Переписка и корзины покупателей при этом не теряются. Время здесь московское — по нему живёт сервер.</string>
+    <string name="bot_restart_daily">Перезапускать раз в сутки</string>
+    <string name="bot_restart_time">Время перезапуска: %1$s МСК</string>
+    <string name="bot_restart_time_choose">Время перезапуска</string>
+    <string name="bot_restart_time_title">Во сколько перезапускать</string>
+    <string name="bot_restart_now">Перезапустить сейчас</string>
+    <string name="bot_restart_done">Бот перезапущен</string>
+    <string name="bot_restart_idle">Опрос не запущен</string>
+    <string name="bot_restart_started">Бот на связи с %1$s</string>
+    <string name="bot_restart_last">Последний перезапуск: %1$s (%2$s)</string>
+    <string name="bot_restart_next">Следующий перезапуск: %1$s</string>
+    <string name="bot_restart_off">Автоматический перезапуск выключен</string>
+    <string name="bot_section_catch">Перехват заявок</string>
+    <string name="bot_catch_hint">Если в сообщении есть телефон, бот сам заводит заявку: клиента по номеру и заказ, в комментарий которого кладёт всё сообщение. В переписке он про это ничего не пишет — заявка просто появляется здесь, в заказах.</string>
+    <string name="bot_ignore_phones">Номера, которые не перехватывать</string>
+    <string name="bot_ignore_hint">По одному номеру в строке: свои телефоны и телефоны продавцов. Заявки по ним заводиться не будут. Добавить — новая строка, удалить — стереть строку. После сохранения сервер приведёт номера к единому виду.</string>
+    <string name="bot_order_words">Слова, по которым бот видит заказ</string>
+    <string name="bot_spam">Удалять спам в группе</string>
+    <string name="bot_spam_hint">Бот сам удаляет в группе сообщения про заработок, ставки, розыгрыши и «пишите в личку». Работает только при включённом разборе ИИ и только если бот — администратор группы. Сообщения продавцов не трогает никогда, а при малейшем сомнении оставляет: удалённое не вернуть. Что удалено — видно в журнале сервера.</string>
+    <string name="bot_ai">Разбирать сообщения ИИ</string>
+    <string name="bot_ai_hint">Бот читает сообщение целиком и сам решает: заказ это или благодарность, кто написал и что именно просит. Опознанные товары он сразу кладёт в заявку — проверьте их перед сборкой. Модель: %1$s. Выключите — бот вернётся к словам из списка ниже.</string>
+    <string name="bot_ai_missing">Разбор недоступен: не задан ключ ИИ. Впишите его ниже (кнопка «?» подскажет, где взять) и сохраните. Пока бот работает по словам из списка.</string>
+    <string name="bot_order_words_hint">Через запятую. Нужны, когда телефона в сообщении нет: бот заведёт заявку по имени в MAX, а вы ответите человеку прямо в мессенджере. Сравнение по началу слова: «заказ» подходит и «заказать», и «заказываю». Пустое поле вернёт список по умолчанию. Сообщения администраторов группы в заявки не превращаются.</string>
+    <string name="bot_check">Проверить связь</string>
+    <string name="bot_check_ok">MAX узнал бота: %1$s</string>
+    <string name="bot_status_unknown">Состояние неизвестно</string>
+    <string name="bot_section_group">Группа с клиентами</string>
+    <string name="bot_group_none">Группа не выбрана — новости отправлять некуда</string>
+    <string name="bot_group_set">Новости уходят в «%1$s»</string>
+    <string name="bot_group_id">Выбрана группа №%1$d</string>
+    <string name="bot_group_hint">Добавьте бота в группу и дайте права администратора, потом выберите её здесь.</string>
+    <string name="bot_group_choose">Выбрать группу</string>
+    <string name="bot_group_clear">Убрать группу</string>
+    <string name="bot_group_empty">Бот пока не состоит ни в одной группе</string>
+    <string name="bot_send_menu">Прислать меню в группу</string>
+    <string name="bot_menu_sent">Меню отправлено — закрепите его в группе</string>
+    <string name="bot_save">Сохранить и перезапустить бота</string>
+    <string name="bot_saved">Сохранено — бот перезапущен</string>
+    <string name="bot_not_loaded">Сначала нужно загрузить настройки с сервера</string>
+    <string name="bot_about">Бот показывает каталог с фотографиями, ведёт корзину и принимает заказы — они попадают на сайт и в приложение как обычные заказы, со списанием склада.
+
+В группе он молчит, пока к нему не обратятся: «бот, каталог», «бот, оформи заказ», «бот, отмена» — слова можно писать в любом порядке. Оформление уводит в личный чат вместе с корзиной, чтобы телефон и адрес не видели все.</string>
+    <string name="news_to_group">В группу MAX</string>
+    <string name="news_sent">Новость отправлена в группу</string>
+
+    <!-- Сборка на неделю -->
+    <string name="nav_week">Сборка на неделю</string>
+    <string name="nav_week_short">Сборка</string>
+    <string name="week_title">Сборка заказов</string>
+    <string name="week_summary">В сборке заказов: %1$d на %2$s</string>
+    <string name="week_waiting">Ещё %1$d новых — подтвердите их, чтобы попали в сборку</string>
+    <string name="week_in_orders">заказов: %1$d</string>
+    <string name="week_empty">Собирать пока нечего</string>
+    <string name="week_empty_hint">Здесь появятся товары из подтверждённых заказов — все, что ещё не собраны, независимо от даты. Заказ считается после статуса «Принят» и уходит из списка, когда становится «Выполнен».</string>
+    <string name="week_mode_all">Показать все</string>
+    <string name="week_mode_clients">Кто заказал</string>
+    <string name="week_share_title">Поделиться заказом</string>
+    <string name="week_buyers_close">Закрыть</string>
+    <string name="week_packed">Положили</string>
+    <string name="week_packed_progress">Положили: %1$d из %2$d</string>
+    <string name="week_packed_all">Всё положили ✓</string>
+    <string name="week_packed_order">Весь заказ собран</string>
+    <string name="week_pack_all">Отметить всё</string>
+    <string name="week_unpack_all">Снять всё</string>
+
+    <!-- Контакты и новости сайта -->
+    <string name="nav_contacts">Контакты</string>
+    <string name="site_title">Контакты и новости</string>
+    <string name="site_section_contacts">Как связаться</string>
+    <string name="site_phone">Телефон</string>
+    <string name="site_hours">Часы работы</string>
+    <string name="site_email">Почта</string>
+    <string name="site_contacts_hint">Показывается в контактах и в подвале сайта. Пустое поле — на сайте останется прежний текст.</string>
+    <string name="site_section_top">Полоска вверху сайта</string>
+    <string name="site_top_left">Слева — приём заказов</string>
+    <string name="site_top_right">Справа — доставка</string>
+    <string name="site_top_hint">Две короткие строчки над шапкой сайта. На узком экране видна только левая.</string>
+    <string name="site_section_texts">Тексты страницы «Контакты»</string>
+    <string name="site_delivery">Доставка</string>
+    <string name="site_pay">Оплата</string>
+    <string name="site_about">О продукции</string>
+    <string name="site_texts_hint">Каждая строка станет отдельным абзацем на сайте.</string>
+    <string name="site_save">Сохранить тексты</string>
+    <string name="site_saved">Сохранено — сайт уже обновился</string>
+    <string name="site_save_failed">Не удалось собрать запрос</string>
+    <string name="site_not_loaded">Сначала нужно загрузить тексты с сайта</string>
+    <string name="site_section_news">Новости бегущей строкой</string>
+    <string name="site_news_hint">Показываются лентой на главной странице сайта, свежие — первыми.</string>
+    <string name="site_news_empty">Новостей пока нет — строка на сайте не показывается.</string>
+    <string name="site_news_add">Добавить новость</string>
+    <string name="site_news_edit">Изменить новость</string>
+    <string name="site_news_delete">Удалить новость</string>
+    <string name="site_news_published">Показывать на сайте</string>
+    <string name="site_news_text">Текст новости</string>
+    <string name="site_news_text_hint">Одна строка: коротко, как в объявлении.</string>
+    <string name="site_news_empty_error">Введите текст</string>
+</resources>

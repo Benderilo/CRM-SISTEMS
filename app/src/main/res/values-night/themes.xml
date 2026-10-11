@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources xmlns:tools="http://schemas.android.com/tools">
+
+    <style name="Base.Theme.CRMSistems" parent="Theme.Material3.DayNight.NoActionBar">
+        <item name="colorPrimary">#A8C4FF</item>
+        <item name="colorOnPrimary">#002E6A</item>
+        <item name="colorPrimaryContainer">#0F4493</item>
+        <item name="colorOnPrimaryContainer">#DCE6FF</item>
+
+        <item name="colorSecondary">#6ADBB0</item>
+        <item name="colorOnSecondary">#003823</item>
+        <item name="colorSecondaryContainer">#005138</item>
+        <item name="colorOnSecondaryContainer">#C6F2E1</item>
+
+        <item name="colorTertiary">#CBBEFF</item>
+        <item name="colorOnTertiary">#381E72</item>
+        <item name="colorTertiaryContainer">#4F378B</item>
+        <item name="colorOnTertiaryContainer">#E7DEFF</item>
+
+        <item name="colorError">#FFB4AB</item>
+        <item name="colorOnError">#690005</item>
+        <item name="colorErrorContainer">#93000A</item>
+        <item name="colorOnErrorContainer">#FFDAD6</item>
+
+        <item name="android:colorBackground">#0F1218</item>
+        <item name="colorOnBackground">#E3E6EE</item>
+        <item name="colorSurface">#171B22</item>
+        <item name="colorOnSurface">#E3E6EE</item>
+        <item name="colorSurfaceVariant">#242A34</item>
+        <item name="colorOnSurfaceVariant">#C1C6D2</item>
+        <item name="colorOutline">#8B90A0</item>
+        <item name="colorOutlineVariant">#39404C</item>
+
+        <item name="android:windowLightStatusBar">false</item>
+        <item name="android:windowLightNavigationBar">false</item>
+        <item name="android:statusBarColor" tools:targetApi="21">@android:color/transparent</item>
+        <item name="android:navigationBarColor" tools:targetApi="21">@android:color/transparent</item>
+    </style>
+</resources>

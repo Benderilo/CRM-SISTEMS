@@ -1,0 +1,45 @@
+{{define "content"}}
+<section class="section">
+  <div class="wrap auth-page">
+    <div class="panel">
+      <h1 style="text-align:center;margin-bottom:6px">Вход</h1>
+      <p style="text-align:center;color:var(--muted);margin-bottom:26px">
+        Логин — ваш номер телефона
+      </p>
+
+      {{if .Error}}<div class="alert alert-err">{{.Error}}</div>{{end}}
+
+      <form method="post" action="/login">
+        <input type="hidden" name="next" value="{{.Data.Next}}">
+        <div class="field">
+          <label for="phone">Телефон</label>
+          <input type="tel" id="phone" name="phone" value="{{.Data.Phone}}" data-phone
+                 placeholder="+7 (999) 123-45-67" autocomplete="tel" required autofocus>
+        </div>
+        <div class="field">
+          <label for="password">Пароль</label>
+          <input type="password" id="password" name="password"
+                 autocomplete="current-password" required>
+        </div>
+        <button class="btn btn-primary btn-block" type="submit">Войти</button>
+      </form>
+
+      <!-- Ни почты, ни СМС магазин не рассылает, поэтому пароль восстанавливают
+           по-человечески: звонком. Продавец задаёт новый и диктует его. -->
+      <details class="auth-forgot" style="margin-top:20px">
+        <summary style="cursor:pointer;font-size:14.5px;color:var(--muted)">Забыли пароль?</summary>
+        <p style="margin:10px 0 0;font-size:14.5px;color:var(--muted)">
+          Позвоните нам{{if .Site.Phone}} — <a href="tel:{{.Site.PhoneLink}}">{{.Site.Phone}}</a>{{end}},
+          и мы назначим новый пароль прямо во время разговора.
+          {{if .Site.Hours}}<br>Работаем: {{.Site.Hours}}.{{end}}
+          <br>Входить будете по тому же номеру телефона.
+        </p>
+      </details>
+
+      <p style="text-align:center;margin:22px 0 0;font-size:14.5px">
+        Ещё нет аккаунта? <a href="/register">Зарегистрироваться</a>
+      </p>
+    </div>
+  </div>
+</section>
+{{end}}

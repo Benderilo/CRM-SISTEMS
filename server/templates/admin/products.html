@@ -1,0 +1,72 @@
+{{define "content"}}
+<div class="page-head">
+  <div>
+    <h1>Товары</h1>
+    <p>Всего позиций: {{len .Data.Products}}</p>
+  </div>
+  <a class="btn btn-primary btn-sm" href="/admin/products/new">+ Новый товар</a>
+</div>
+
+<div class="tiles">
+  <div class="tile">
+    <div class="k">Склад по себестоимости</div>
+    <div class="v">{{money .Data.StockValue}}</div>
+  </div>
+  <div class="tile">
+    <div class="k">Склад в ценах продажи</div>
+    <div class="v">{{money .Data.RetailValue}}</div>
+  </div>
+</div>
+
+<div class="abox abox-flush">
+  {{if .Data.Products}}
+  <div class="table-scroll">
+    <table class="data">
+      <thead>
+        <tr>
+          <th></th><th>Название</th><th>Категория</th>
+          <th class="num">Цена</th><th class="num">Себест.</th><th class="num">Наценка</th>
+          <th class="num">Остаток</th><th>На сайте</th><th></th>
+        </tr>
+      </thead>
+      <tbody>
+        {{range .Data.Products}}
+        <tr {{if .Archived}}style="opacity:.5"{{end}}>
+          <td>
+            {{if .Image}}<img class="thumb-sm" src="{{.Image}}" alt="">
+            {{else}}<div class="thumb-sm">{{initial .Name}}</div>{{end}}
+          </td>
+          <td>
+            <a href="/admin/products/{{.ID}}"><strong>{{.Title}}</strong></a>
+            {{if .SKU}}<div class="small muted">арт. {{.SKU}}</div>{{end}}
+          </td>
+          <td class="small" data-label="Категория">{{if .Category}}{{.Category}}{{else}}<span class="muted">—</span>{{end}}</td>
+          <td class="num" data-label="Цена">{{money .Price}}</td>
+          <td class="num muted" data-label="Себест.">{{money .Cost}}</td>
+          <td class="num small" data-label="Наценка">{{printf "%.0f" .MarginPercent}}%</td>
+          <td class="num" data-label="Остаток">
+            <span class="{{if not .InStock}}stock-out{{else if .IsLowStock}}stock-low{{else}}stock-in{{end}}">
+              {{qty .Stock}} {{.Unit}}
+            </span>
+          </td>
+          <td data-label="На сайте">
+            {{if .Archived}}<span class="chip chip-canceled">В архиве</span>
+            {{else if .Published}}<span class="chip chip-done">Опубликован</span>
+            {{else}}<span class="chip chip-packing">Скрыт</span>{{end}}
+          </td>
+          <td class="num"><a class="btn btn-outline btn-sm" href="/admin/products/{{.ID}}">Править</a></td>
+        </tr>
+        {{end}}
+      </tbody>
+    </table>
+  </div>
+  {{else}}
+  <div class="empty" style="padding:44px 20px">
+    <div class="empty-icon">🥩</div>
+    <h3>Товаров ещё нет</h3>
+    <p>Добавьте первый — он сразу появится на витрине.</p>
+    <p style="margin-top:18px"><a class="btn btn-primary btn-sm" href="/admin/products/new">Добавить товар</a></p>
+  </div>
+  {{end}}
+</div>
+{{end}}

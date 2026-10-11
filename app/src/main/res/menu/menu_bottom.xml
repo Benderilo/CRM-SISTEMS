@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+    <item
+        android:id="@+id/nav_products"
+        android:icon="@drawable/ic_products"
+        android:title="@string/nav_products" />
+    <item
+        android:id="@+id/nav_sales"
+        android:icon="@drawable/ic_sales"
+        android:title="@string/nav_sales" />
+    <item
+        android:id="@+id/nav_clients"
+        android:icon="@drawable/ic_clients"
+        android:title="@string/nav_clients" />
+    <item
+        android:id="@+id/nav_week"
+        android:icon="@drawable/ic_calendar"
+        android:title="@string/nav_week_short" />
+    <item
+        android:id="@+id/nav_analytics"
+        android:icon="@drawable/ic_analytics"
+        android:title="@string/nav_analytics" />
+</menu>

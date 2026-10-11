@@ -1,0 +1,51 @@
+{{define "layout"}}<!doctype html>
+<html lang="ru">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>{{.Title}} — панель управления</title>
+<meta name="robots" content="noindex, nofollow">
+<link rel="stylesheet" href="/static/css/style.css?v={{ver}}">
+<link rel="stylesheet" href="/static/css/admin.css?v={{ver}}">
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'><rect width='32' height='32' rx='8' fill='%23221b17'/><text x='16' y='23' font-size='19' font-family='Georgia,serif' font-weight='700' fill='%23fff' text-anchor='middle'>Б</text></svg>">
+</head>
+<body class="admin">
+
+{{if .Admin.ID}}
+<div class="shell">
+  <aside class="side">
+    <div class="side-logo">
+      <span class="logo-mark">{{.Site.Initial}}</span>
+      <span><b>{{.Site.Title}}</b><span>панель управления</span></span>
+    </div>
+
+    <nav>
+      <a href="/admin" {{if eq .Nav "dashboard"}}class="on"{{end}}>Сводка</a>
+      <a href="/admin/orders" {{if eq .Nav "orders"}}class="on"{{end}}>Заказы</a>
+      <a href="/admin/products" {{if eq .Nav "products"}}class="on"{{end}}>Товары</a>
+      <a href="/admin/stock" {{if eq .Nav "stock"}}class="on"{{end}}>Склад</a>
+      <a href="/admin/clients" {{if eq .Nav "clients"}}class="on"{{end}}>Клиенты</a>
+    </nav>
+
+    <div class="side-foot">
+      <a href="/" target="_blank">Открыть сайт →</a>
+      <form method="post" action="/admin/logout" style="margin-top:8px">
+        <button class="btn btn-outline btn-sm btn-block" type="submit">Выйти</button>
+      </form>
+      <p style="margin:12px 0 0;font-size:12px">Вы вошли как {{.Admin.Login}}</p>
+    </div>
+  </aside>
+
+  <div class="content">
+    {{if .Flash}}<div class="alert alert-ok">{{.Flash}}</div>{{end}}
+    {{if .Error}}<div class="alert alert-err">{{.Error}}</div>{{end}}
+    {{template "content" .}}
+  </div>
+</div>
+{{else}}
+  {{template "content" .}}
+{{end}}
+
+<script src="/static/js/shop.js?v={{ver}}"></script>
+</body>
+</html>{{end}}

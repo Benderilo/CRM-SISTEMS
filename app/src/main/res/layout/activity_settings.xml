@@ -1,0 +1,236 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/root"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="?android:attr/colorBackground"
+    android:orientation="vertical">
+
+    <include
+        android:id="@+id/appbarInc"
+        layout="@layout/view_toolbar" />
+
+    <androidx.core.widget.NestedScrollView
+        android:id="@+id/scroll"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:paddingBottom="24dp">
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="16dp"
+                android:layout_marginTop="12dp"
+                android:text="@string/settings_general"
+                android:textAppearance="@style/TextAppearance.Crm.SectionTitle"
+                android:textColor="?attr/colorPrimary" />
+
+            <com.google.android.material.card.MaterialCardView
+                style="@style/Widget.Crm.Card"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    android:padding="16dp">
+
+                    <com.google.android.material.textfield.TextInputLayout
+                        style="@style/Widget.Crm.TextField"
+                        android:layout_marginTop="0dp"
+                        android:hint="@string/settings_company">
+
+                        <com.google.android.material.textfield.TextInputEditText
+                            android:id="@+id/company"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:inputType="textCapWords" />
+                    </com.google.android.material.textfield.TextInputLayout>
+
+                    <com.google.android.material.textfield.TextInputLayout
+                        style="@style/Widget.Crm.TextField"
+                        android:hint="@string/settings_currency">
+
+                        <com.google.android.material.textfield.TextInputEditText
+                            android:id="@+id/currency"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:inputType="text"
+                            android:maxLength="4" />
+                    </com.google.android.material.textfield.TextInputLayout>
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="16dp"
+                        android:text="@string/settings_theme"
+                        android:textAppearance="?attr/textAppearanceLabelLarge" />
+
+                    <com.google.android.material.button.MaterialButtonToggleGroup
+                        android:id="@+id/themeGroup"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="6dp"
+                        app:selectionRequired="true"
+                        app:singleSelection="true">
+
+                        <com.google.android.material.button.MaterialButton
+                            android:id="@+id/themeSystem"
+                            style="@style/Widget.Material3.Button.OutlinedButton"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:text="@string/settings_theme_system" />
+
+                        <com.google.android.material.button.MaterialButton
+                            android:id="@+id/themeLight"
+                            style="@style/Widget.Material3.Button.OutlinedButton"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:text="@string/settings_theme_light" />
+
+                        <com.google.android.material.button.MaterialButton
+                            android:id="@+id/themeDark"
+                            style="@style/Widget.Material3.Button.OutlinedButton"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:text="@string/settings_theme_dark" />
+                    </com.google.android.material.button.MaterialButtonToggleGroup>
+
+                    <com.google.android.material.materialswitch.MaterialSwitch
+                        android:id="@+id/lowStock"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="16dp"
+                        android:text="@string/settings_low_stock" />
+
+                    <com.google.android.material.materialswitch.MaterialSwitch
+                        android:id="@+id/orderAlerts"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="16dp"
+                        android:text="@string/settings_order_alerts" />
+
+                    <com.google.android.material.materialswitch.MaterialSwitch
+                        android:id="@+id/orderReminder"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="12dp"
+                        android:text="@string/settings_order_reminder" />
+
+                    <TextView
+                        android:id="@+id/orderHint"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="6dp"
+                        android:alpha="0.7"
+                        android:text="@string/settings_order_hint"
+                        android:textAppearance="?attr/textAppearanceBodySmall" />
+                </LinearLayout>
+            </com.google.android.material.card.MaterialCardView>
+
+            <TextView
+                android:id="@+id/dataTitle"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="16dp"
+                android:layout_marginTop="20dp"
+                android:text="@string/settings_data"
+                android:textAppearance="@style/TextAppearance.Crm.SectionTitle"
+                android:textColor="?attr/colorPrimary" />
+
+            <com.google.android.material.card.MaterialCardView
+                style="@style/Widget.Crm.Card"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    android:paddingTop="4dp"
+                    android:paddingBottom="4dp">
+
+                    <include
+                        android:id="@+id/rowExportXlsx"
+                        layout="@layout/view_setting_row" />
+
+                    <include
+                        android:id="@+id/rowImportXlsx"
+                        layout="@layout/view_setting_row" />
+
+                    <!-- CSV и резервная копия нужны редко — прячем их под строку
+                         «Другие форматы», чтобы обычные два действия были на виду. -->
+                    <include
+                        android:id="@+id/rowMore"
+                        layout="@layout/view_setting_row" />
+
+                    <LinearLayout
+                        android:id="@+id/moreBox"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="vertical"
+                        android:visibility="gone">
+
+                        <include
+                            android:id="@+id/rowExportCsv"
+                            layout="@layout/view_setting_row" />
+
+                        <include
+                            android:id="@+id/rowImportCsv"
+                            layout="@layout/view_setting_row" />
+
+                        <include
+                            android:id="@+id/rowBackup"
+                            layout="@layout/view_setting_row" />
+
+                        <include
+                            android:id="@+id/rowRestore"
+                            layout="@layout/view_setting_row" />
+                    </LinearLayout>
+                </LinearLayout>
+            </com.google.android.material.card.MaterialCardView>
+
+            <com.google.android.material.card.MaterialCardView
+                style="@style/Widget.Crm.Card"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    android:paddingTop="4dp"
+                    android:paddingBottom="4dp">
+
+                    <include
+                        android:id="@+id/rowClearOrders"
+                        layout="@layout/view_setting_row" />
+
+                    <include
+                        android:id="@+id/rowClear"
+                        layout="@layout/view_setting_row" />
+                </LinearLayout>
+            </com.google.android.material.card.MaterialCardView>
+
+            <TextView
+                android:id="@+id/about"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:padding="16dp"
+                android:text="@string/about_text"
+                android:textAppearance="?attr/textAppearanceBodySmall"
+                android:textColor="?attr/colorOnSurfaceVariant" />
+        </LinearLayout>
+    </androidx.core.widget.NestedScrollView>
+</LinearLayout>

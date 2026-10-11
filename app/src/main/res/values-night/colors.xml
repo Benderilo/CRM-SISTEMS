@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <!--
+        Тёмная тема: заливка приглушённая (карточки лежат на фоне #0F1218),
+        текст берём из ночной палитры приложения, чтобы статусы не выбивались
+        из общего вида. Светлые варианты — в values/colors.xml.
+    -->
+    <color name="status_new_bg">#E9EDF0</color>
+    <color name="status_new_fg">#171B20</color>
+    <color name="status_accepted_bg">#1D3766</color>
+    <color name="status_accepted_fg">#A8C4FF</color>
+    <color name="status_packing_bg">#46290E</color>
+    <color name="status_packing_fg">#FFA45C</color>
+    <color name="status_delivery_bg">#4A3A00</color>
+    <color name="status_delivery_fg">#FFCC00</color>
+    <color name="status_done_bg">#0E4B37</color>
+    <color name="status_done_fg">#6ADBB0</color>
+    <color name="status_canceled_bg">#5C1210</color>
+    <color name="status_canceled_fg">#FF9C90</color>
+
+    <!-- Сегменты клиента в тёмной теме: та же логика, что у статусов заказа. -->
+    <color name="segment_new_bg">#182B4D</color>
+    <color name="segment_new_fg">#A8C4FF</color>
+    <color name="segment_regular_bg">#103A2C</color>
+    <color name="segment_regular_fg">#6ADBB0</color>
+    <color name="segment_vip_bg">#45360F</color>
+    <color name="segment_vip_fg">#F1CE6A</color>
+    <color name="segment_sleeping_bg">#33301F</color>
+    <color name="segment_sleeping_fg">#D8CE9B</color>
+    <color name="segment_problem_bg">#46201F</color>
+    <color name="segment_problem_fg">#FFB4AB</color>
+    <color name="segment_none_bg">#1C1F26</color>
+    <color name="segment_none_fg">#C6C6D0</color>
+</resources>

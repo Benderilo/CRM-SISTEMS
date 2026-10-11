@@ -1,0 +1,119 @@
+{{define "content"}}
+{{$o := .Data.Order}}
+<div class="page-head">
+  <div>
+    <p class="small muted" style="margin:0 0 4px"><a href="/admin/orders">← Все заказы</a></p>
+    <h1>Заказ {{$o.Number}}</h1>
+    <p>от {{$o.CreatedStr}} · <span class="chip chip-{{$o.StatusSlug}}">{{$o.StatusName}}</span>
+      {{if $o.FromApp}} · продажа заведена в приложении{{end}}</p>
+  </div>
+</div>
+
+<div class="grid2">
+  <div>
+    <div class="abox abox-flush">
+      <h3>Состав заказа</h3>
+      <div class="table-scroll">
+        <table class="data">
+          <thead>
+            <tr><th>Товар</th><th class="num">Кол-во</th><th class="num">Цена</th>
+                <th class="num">Сумма</th><th class="num">Прибыль</th></tr>
+          </thead>
+          <tbody>
+            {{range $o.Items}}
+            <tr>
+              <td>
+                {{if .ProductID}}<a href="/admin/products/{{.ProductID}}">{{.Name}}</a>
+                {{else}}{{.Name}} <span class="small muted">(товар удалён)</span>{{end}}
+              </td>
+              <td class="num" data-label="Кол-во">{{qty .Qty}} {{.Unit}}</td>
+              <td class="num" data-label="Цена">{{money .UnitPrice}}</td>
+              <td class="num" data-label="Сумма"><strong>{{money .Sum}}</strong></td>
+              <td class="num muted" data-label="Прибыль">{{money .Profit}}</td>
+            </tr>
+            {{end}}
+          </tbody>
+        </table>
+      </div>
+      <div style="padding:16px 22px 0;border-top:1px solid var(--a-line);margin-top:6px">
+        <div class="summary-row"><span>Прибыль по заказу</span><span>{{money $o.Profit}}</span></div>
+        <div class="summary-row total"><span>Итого</span><span>{{money $o.Total}}</span></div>
+      </div>
+    </div>
+
+    <div class="abox">
+      <h3>Данные получателя</h3>
+      <ul class="spec" style="margin:0">
+        <li><span>Имя</span><span>{{if $o.ClientName}}{{$o.ClientName}}{{else}}—{{end}}</span></li>
+        <li><span>Телефон</span><span><a href="tel:{{$o.Phone}}">{{phone $o.Phone}}</a></span></li>
+        {{if $o.Email}}<li><span>Почта</span><span><a href="mailto:{{$o.Email}}">{{$o.Email}}</a></span></li>{{end}}
+        <li><span>Способ получения</span><span>{{$o.Delivery}}</span></li>
+        {{if $o.Address}}<li><span>Адрес</span><span>{{$o.Address}}</span></li>{{end}}
+        <li><span>Оплата</span><span>{{$o.PayMethod}}</span></li>
+        {{if $o.Comment}}<li><span>Комментарий</span><span>{{$o.Comment}}</span></li>{{end}}
+      </ul>
+      {{if .Data.Client}}
+      <a class="btn btn-outline btn-sm" href="/admin/clients/{{.Data.Client.ID}}" style="margin-top:16px">
+        Карточка клиента →
+      </a>
+      {{end}}
+    </div>
+  </div>
+
+  <div>
+    <div class="abox">
+      <h3>Статус заказа</h3>
+      <form method="post" action="/admin/orders/{{$o.ID}}/status">
+        <div class="radio-cards">
+          {{range $i, $name := statuses}}
+          <label class="radio-card">
+            <input type="radio" name="status" value="{{$i}}" {{if eq $i $o.Status}}checked{{end}}>
+            <span>{{$name}}</span>
+          </label>
+          {{end}}
+        </div>
+        <button class="btn btn-primary btn-block" type="submit" style="margin-top:16px">
+          Сохранить статус
+        </button>
+      </form>
+      <p class="small muted" style="margin:14px 0 0">
+        При отмене товары возвращаются на склад автоматически.
+      </p>
+    </div>
+
+    <div class="abox">
+      <h3>Склад</h3>
+      {{if $o.StockWritten}}
+      <p class="small">Товары этого заказа <strong>списаны со склада</strong>.</p>
+      <form method="post" action="/admin/orders/{{$o.ID}}/stock"
+            onsubmit="return confirm('Вернуть товары заказа {{$o.Number}} на склад?')">
+        <input type="hidden" name="action" value="return">
+        <button class="btn btn-outline btn-sm btn-block" type="submit">Вернуть на склад</button>
+      </form>
+      {{else if eq $o.Status 5}}
+      <p class="small">Заказ отменён, товары <strong>возвращены на склад</strong>.</p>
+      {{else}}
+      <p class="small">Товары этого заказа <strong>со склада не списаны</strong> — остаток их не учитывает.</p>
+      <form method="post" action="/admin/orders/{{$o.ID}}/stock"
+            onsubmit="return confirm('Списать товары заказа {{$o.Number}} со склада?')">
+        <input type="hidden" name="action" value="write">
+        <button class="btn btn-primary btn-sm btn-block" type="submit">Списать со склада</button>
+      </form>
+      {{end}}
+      <p class="small muted" style="margin:12px 0 0">
+        Обычно списание происходит само при оформлении заказа. Кнопка нужна, если
+        остаток разошёлся с жизнью.
+      </p>
+    </div>
+
+    <div class="abox">
+      <h3>Опасная зона</h3>
+      <p class="small muted">Удаление заказа необратимо. Обычно достаточно поставить статус «Отменён».</p>
+      <form method="post" action="/admin/orders/{{$o.ID}}/delete"
+            onsubmit="return confirm('Удалить заказ {{$o.Number}} без возможности восстановления?')">
+        <button class="btn btn-danger btn-sm btn-block" type="submit">Удалить заказ</button>
+      </form>
+    </div>
+  </div>
+</div>
+{{end}}

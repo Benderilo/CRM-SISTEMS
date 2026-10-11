@@ -1,0 +1,38 @@
+{{define "content"}}
+{{template "ticker" .Data.News}}
+
+<section class="section">
+  <div class="wrap">
+    <div class="section-head">
+      <div>
+        <h1 style="margin-bottom:4px">{{if .Data.Category}}{{.Data.Category}}{{else}}Каталог{{end}}</h1>
+        <p>{{len .Data.Products}} {{if eq (len .Data.Products) 1}}позиция{{else}}позиций{{end}} в наличии и под заказ</p>
+      </div>
+      <form method="get" action="/catalog" style="display:flex;gap:8px">
+        {{if .Data.Category}}<input type="hidden" name="cat" value="{{.Data.Category}}">{{end}}
+        <input type="search" name="q" value="{{.Data.Search}}" placeholder="Поиск по названию…" style="width:230px">
+        <button class="btn btn-outline btn-sm" type="submit">Найти</button>
+      </form>
+    </div>
+
+    <div class="cats" style="margin-bottom:30px">
+      <a class="cat-chip {{if not .Data.Category}}on{{end}}" href="/catalog">Всё</a>
+      {{range .Data.Categories}}
+      <a class="cat-chip {{if eq . $.Data.Category}}on{{end}}" href="/catalog?cat={{.}}">{{.}}</a>
+      {{end}}
+    </div>
+
+    {{if .Data.Products}}
+    <div class="grid">
+      {{range .Data.Products}}{{template "productcard" card . $}}{{end}}
+    </div>
+    {{else}}
+    <div class="empty">
+      <div class="empty-icon">🔍</div>
+      <h3>Ничего не нашлось</h3>
+      <p>Попробуйте изменить запрос или посмотрите <a href="/catalog">весь каталог</a>.</p>
+    </div>
+    {{end}}
+  </div>
+</section>
+{{end}}

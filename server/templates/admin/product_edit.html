@@ -1,0 +1,147 @@
+{{define "content"}}
+{{$p := .Data.Product}}
+<div class="page-head">
+  <div>
+    <p class="small muted" style="margin:0 0 4px"><a href="/admin/products">← Все товары</a></p>
+    <h1>{{if .Data.IsNew}}Новый товар{{else}}{{$p.Title}}{{end}}</h1>
+    {{if not .Data.IsNew}}<p>Изменён {{dateTimeStr $p.UpdatedAt}}</p>{{end}}
+  </div>
+</div>
+
+<form method="post" action="/admin/products/save" enctype="multipart/form-data">
+  <input type="hidden" name="id" value="{{$p.ID}}">
+
+  <div class="grid2">
+    <div>
+      <div class="abox">
+        <h3>Основное</h3>
+        <div class="field">
+          <label for="name">Название *</label>
+          <input type="text" id="name" name="name" value="{{$p.Name}}"
+                 placeholder="Пельмени домашние «Классические»" required autofocus>
+        </div>
+        <div class="field">
+          <label for="description">Описание</label>
+          <textarea id="description" name="description"
+                    placeholder="Состав, способ приготовления, вес порции…">{{$p.Description}}</textarea>
+          <div class="hint">Показывается в карточке на сайте</div>
+        </div>
+        <div class="field-row">
+          <div class="field">
+            <label for="category">Категория</label>
+            <input type="text" id="category" name="category" value="{{$p.Category}}"
+                   list="cats" placeholder="Пельмени">
+            <datalist id="cats">
+              {{range .Data.Categories}}<option value="{{.}}">{{end}}
+            </datalist>
+          </div>
+          <div class="field">
+            <label for="unit">Единица измерения</label>
+            <input type="text" id="unit" name="unit" value="{{$p.Unit}}" list="units" placeholder="кг">
+            <datalist id="units">
+              <option value="кг"><option value="шт"><option value="уп"><option value="л">
+            </datalist>
+          </div>
+        </div>
+      </div>
+
+      <div class="abox">
+        <h3>Цена и склад</h3>
+        <div class="field-row">
+          <div class="field">
+            <label for="price">Цена продажи, ₽ *</label>
+            <input type="text" id="price" name="price" value="{{qty $p.Price}}" inputmode="decimal" required>
+          </div>
+          <div class="field">
+            <label for="cost">Себестоимость, ₽</label>
+            <input type="text" id="cost" name="cost" value="{{qty $p.Cost}}" inputmode="decimal">
+            <div class="hint">Нужна для расчёта прибыли, на сайте не видна</div>
+          </div>
+        </div>
+        <div class="field-row">
+          <div class="field">
+            <label for="stock">Остаток на складе</label>
+            <input type="text" id="stock" name="stock" value="{{qty $p.Stock}}" inputmode="decimal">
+          </div>
+          <div class="field">
+            <label for="min_stock">Минимальный остаток</label>
+            <input type="text" id="min_stock" name="min_stock" value="{{qty $p.MinStock}}" inputmode="decimal">
+            <div class="hint">Ниже него товар подсветится как «заканчивается»</div>
+          </div>
+        </div>
+        <div class="field-row">
+          <div class="field">
+            <label for="sku">Артикул</label>
+            <input type="text" id="sku" name="sku" value="{{$p.SKU}}">
+          </div>
+          <div class="field">
+            <label for="barcode">Штрихкод</label>
+            <input type="text" id="barcode" name="barcode" value="{{$p.Barcode}}">
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div>
+      <div class="abox">
+        <h3>Фотография</h3>
+        <div style="aspect-ratio:4/3;border-radius:10px;overflow:hidden;margin-bottom:14px;
+                    background:linear-gradient(150deg,#f0e2d2,#e2cdb4);display:grid;place-items:center">
+          {{if $p.Image}}<img src="{{$p.Image}}" alt="" style="width:100%;height:100%;object-fit:cover">
+          {{else}}<span style="font-family:var(--serif);font-size:48px;color:rgba(141,63,44,.3)">
+            {{initial $p.Name}}</span>{{end}}
+        </div>
+        <div class="field">
+          <input type="file" name="image" accept="image/jpeg,image/png,image/webp,image/gif">
+          <div class="hint">JPG, PNG или WebP, до 12 МБ</div>
+        </div>
+        {{if $p.Image}}
+        <label class="check"><input type="checkbox" name="remove_image" value="1"> Удалить текущее фото</label>
+        {{end}}
+      </div>
+
+      <div class="abox">
+        <h3>Витрина</h3>
+        <label class="check" style="margin-bottom:12px">
+          <input type="checkbox" name="published" value="1" {{if $p.Published}}checked{{end}}>
+          Показывать на сайте
+        </label>
+        <label class="check" style="margin-bottom:16px">
+          <input type="checkbox" name="archived" value="1" {{if $p.Archived}}checked{{end}}>
+          В архив (скрыть везде)
+        </label>
+        <div class="field" style="margin-bottom:0">
+          <label for="sort_order">Порядок сортировки</label>
+          <input type="text" id="sort_order" name="sort_order" value="{{$p.SortOrder}}" inputmode="numeric">
+          <div class="hint">Меньше — выше в каталоге</div>
+        </div>
+      </div>
+
+      <div class="abox">
+        <button class="btn btn-primary btn-block" type="submit">Сохранить товар</button>
+        {{if not .Data.IsNew}}
+        <a class="btn btn-outline btn-block" href="/product/{{$p.ID}}" target="_blank"
+           style="margin-top:10px">Посмотреть на сайте →</a>
+        {{end}}
+      </div>
+
+      {{if not .Data.IsNew}}
+      <div class="abox">
+        <h3>Удаление</h3>
+        <p class="small muted">Если товар уже участвовал в заказах, он не удалится, а уйдёт в архив —
+           чтобы старые заказы остались целыми.</p>
+      </div>
+      {{end}}
+    </div>
+  </div>
+</form>
+
+{{if not .Data.IsNew}}
+<form method="post" action="/admin/products/{{$p.ID}}/delete" style="margin-top:-18px"
+      onsubmit="return confirm('Удалить товар «{{$p.Title}}»?')">
+  <div class="abox" style="max-width:340px;margin-left:auto">
+    <button class="btn btn-danger btn-sm btn-block" type="submit">Удалить товар</button>
+  </div>
+</form>
+{{end}}
+{{end}}

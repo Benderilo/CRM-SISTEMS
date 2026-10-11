@@ -1,0 +1,144 @@
+{{define "layout"}}<!doctype html>
+<html lang="ru">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>{{.Title}}</title>
+<meta name="description" content="{{.Site.Title}} — {{.Site.Tagline}}">
+<link rel="stylesheet" href="/static/css/style.css?v={{ver}}">
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'><rect width='32' height='32' rx='8' fill='%238f2f24'/><text x='16' y='23' font-size='19' font-family='Georgia,serif' font-weight='700' fill='%23fff' text-anchor='middle'>{{.Site.Initial}}</text></svg>">
+</head>
+<body>
+
+<!-- Обе строчки правятся из приложения: «Контакты и новости». -->
+<div class="top">
+  <div class="wrap">
+    <span>{{.Site.TopLeft}}</span>
+    <span class="top-note">{{.Site.TopRight}}</span>
+  </div>
+</div>
+
+<header class="site">
+  <div class="wrap">
+    <a class="logo" href="/">
+      <span class="logo-mark">{{.Site.Initial}}</span>
+      <span class="logo-text">
+        <span class="logo-name">{{.Site.Title}}</span><br>
+        <span class="logo-sub">{{.Site.Tagline}}</span>
+      </span>
+    </a>
+
+    <button class="burger" type="button" aria-label="Меню" onclick="document.querySelector('nav.main').classList.toggle('open')">☰</button>
+
+    <nav class="main">
+      <a href="/" {{if eq .Nav "home"}}class="on"{{end}}>Главная</a>
+      <a href="/catalog" {{if eq .Nav "catalog"}}class="on"{{end}}>Каталог</a>
+      <a href="/contacts" {{if eq .Nav "contacts"}}class="on"{{end}}>Контакты</a>
+      {{if .Client}}
+        <a href="/profile" {{if eq .Nav "profile"}}class="on"{{end}}>Кабинет</a>
+      {{else}}
+        <a href="/login">Войти</a>
+      {{end}}
+    </nav>
+
+    <div class="head-actions">
+      <a class="cart-btn" href="/cart">
+        Корзина
+        <!-- Счётчик есть в разметке всегда: скрипт меняет в нём число после
+             «В корзину», не перезагружая страницу. -->
+        <span class="cart-count" data-cart-count {{if not .CartCount}}hidden{{end}}>{{.CartCount}}</span>
+      </a>
+    </div>
+  </div>
+</header>
+
+<main>
+  {{if .Flash}}<div class="wrap" style="padding-top:22px"><div class="alert alert-ok">{{.Flash}}</div></div>{{end}}
+  {{template "content" .}}
+</main>
+
+<!-- Сюда скрипт кладёт короткое «добавлено» при наборе заказа. -->
+<div class="toast" data-toast hidden></div>
+
+<footer class="site">
+  <div class="wrap">
+    <div class="cols">
+      <div>
+        <h4>{{.Site.Title}}</h4>
+        <p>{{.Site.Tagline}}</p>
+      </div>
+      <div>
+        <h4>Разделы</h4>
+        <ul>
+          <li><a href="/catalog">Каталог</a></li>
+          <li><a href="/cart">Корзина</a></li>
+          <li><a href="/profile">Личный кабинет</a></li>
+          <li><a href="/contacts">Контакты и доставка</a></li>
+        </ul>
+      </div>
+      <div>
+        <h4>Связаться</h4>
+        <ul>
+          <li><a href="tel:{{.Site.PhoneLink}}">{{.Site.Phone}}</a></li>
+          <li>{{.Site.Hours}}</li>
+          {{if .Site.Email}}<li><a href="mailto:{{.Site.Email}}">{{.Site.Email}}</a></li>{{end}}
+        </ul>
+      </div>
+    </div>
+    <div class="foot-bottom">
+      <span>© {{.Site.Title}}.</span>
+    </div>
+  </div>
+</footer>
+
+<script src="/static/js/shop.js?v={{ver}}"></script>
+</body>
+</html>{{end}}
+
+{{/* Бегущая строка новостей. Новости пишутся в приложении и показываются
+     на главной и в каталоге — там, где покупатель проводит больше всего времени.
+     Ленту дублируем: вторая копия въезжает следом, и строка идёт без разрыва.
+     Вызывается как {{template "ticker" .Data.News}}. */}}
+{{define "ticker"}}
+{{if .}}
+<div class="ticker" aria-label="Новости магазина">
+  <div class="ticker-track">
+    {{range .}}<span class="ticker-item">{{.Text}}</span>{{end}}
+    <span aria-hidden="true">{{range .}}<span class="ticker-item">{{.Text}}</span>{{end}}</span>
+  </div>
+</div>
+{{end}}
+{{end}}
+
+{{/* Карточка товара — используется на главной, в каталоге и в «похожих».
+     Вызывается как {{template "productcard" card . $}}: остатки покупателю
+     не показываем, «В корзину» доступно всегда, количество выбирают в корзине. */}}
+{{define "productcard"}}
+{{$p := .P}}
+<article class="card" data-card="{{$p.ID}}">
+  <a class="card-photo" href="/product/{{$p.ID}}">
+    {{if $p.Image}}<img src="{{$p.Image}}" alt="{{$p.Title}}" loading="lazy">
+    {{else}}<span class="ph">{{initial $p.Name}}</span>{{end}}
+    {{if $p.Category}}
+    <span class="card-badges"><span class="badge badge-cat">{{$p.Category}}</span></span>
+    {{end}}
+  </a>
+  <div class="card-body">
+    <h3 class="card-title"><a href="/product/{{$p.ID}}">{{$p.Title}}</a></h3>
+    {{if $p.Description}}<p class="card-desc">{{$p.Description}}</p>{{end}}
+    <div class="card-foot">
+      <span class="price">{{money $p.Price}} <small>/ {{$p.Unit}}</small></span>
+      <form method="post" action="/cart/add" data-add>
+        <input type="hidden" name="id" value="{{$p.ID}}">
+        <!-- Кладём одну единицу: точное количество покупатель выставит в корзине. -->
+        <input type="hidden" name="qty" value="1">
+        <input type="hidden" name="back" value="{{.Back}}">
+        <button class="btn btn-primary btn-sm" type="submit">В корзину</button>
+      </form>
+    </div>
+    <p class="card-incart" data-incart data-for="{{$p.ID}}" {{if not .InCart}}hidden{{end}}>
+      В корзине <b data-incart-qty>{{qty .InCart}}</b> {{$p.Unit}} · <a href="/cart">изменить</a>
+    </p>
+  </div>
+</article>
+{{end}}

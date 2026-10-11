@@ -1,0 +1,27 @@
+{{define "content"}}
+<div class="admin-login">
+  <div class="abox">
+    <div style="text-align:center;margin-bottom:22px">
+      <span class="logo-mark" style="margin:0 auto 12px">{{.Site.Initial}}</span>
+      <h2 style="margin:0 0 4px">Панель управления</h2>
+      <p class="muted small" style="margin:0">{{.Site.Title}}</p>
+    </div>
+
+    {{if .Error}}<div class="alert alert-err">{{.Error}}</div>{{end}}
+
+    <form method="post" action="/admin/login">
+      <div class="field">
+        <label for="login">Логин</label>
+        <input type="text" id="login" name="login" autocomplete="username" required autofocus>
+      </div>
+      <div class="field">
+        <label for="password">Пароль</label>
+        <input type="password" id="password" name="password" autocomplete="current-password" required>
+      </div>
+      <button class="btn btn-primary btn-block" type="submit">Войти</button>
+    </form>
+
+    <p style="text-align:center;margin:18px 0 0"><a href="/" class="small muted">← На сайт</a></p>
+  </div>
+</div>
+{{end}}

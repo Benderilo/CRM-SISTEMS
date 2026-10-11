@@ -1,0 +1,87 @@
+{{define "content"}}
+<div class="page-head">
+  <div>
+    <h1>Склад</h1>
+    <p>Правьте остатки прямо в таблице и нажмите «Сохранить»</p>
+  </div>
+  <a class="btn btn-outline btn-sm" href="/admin/products">Карточки товаров</a>
+</div>
+
+<div class="tiles">
+  <div class="tile accent">
+    <div class="k">Стоимость склада</div>
+    <div class="v">{{money .Data.StockValue}}</div>
+    <div class="s">по себестоимости</div>
+  </div>
+  <div class="tile">
+    <div class="k">В ценах продажи</div>
+    <div class="v">{{money .Data.Retail}}</div>
+  </div>
+  <div class="tile {{if .Data.Low}}warn{{end}}">
+    <div class="k">Заканчивается</div>
+    <div class="v">{{.Data.Low}}</div>
+    <div class="s">позиций ниже минимума</div>
+  </div>
+</div>
+
+<form method="post" action="/admin/stock">
+  <div class="abox abox-flush">
+    {{if .Data.Products}}
+    <div class="table-scroll">
+      <table class="data">
+        <thead>
+          <tr>
+            <th>Товар</th><th>Категория</th><th class="num">Мин.</th>
+            <th class="num" style="width:170px">Остаток</th>
+            <th class="num">Себест.</th><th class="num">Сумма</th>
+          </tr>
+        </thead>
+        <tbody>
+          {{range .Data.Products}}
+          <tr>
+            <td>
+              <div style="display:flex;align-items:center;gap:10px">
+                {{if .Image}}<img class="thumb-sm" src="{{.Image}}" alt="">
+                {{else}}<div class="thumb-sm">{{initial .Name}}</div>{{end}}
+                <div>
+                  <a href="/admin/products/{{.ID}}"><strong>{{.Title}}</strong></a>
+                  {{if not .Published}}<div class="small muted">не показывается на сайте</div>{{end}}
+                </div>
+              </div>
+            </td>
+            <td class="small" data-label="Категория">{{if .Category}}{{.Category}}{{else}}<span class="muted">—</span>{{end}}</td>
+            <td class="num small muted" data-label="Мин.">{{qty .MinStock}}</td>
+            <td class="num" data-label="Остаток">
+              <div>
+                <div class="qty-input" data-qty style="margin-left:auto;width:150px">
+                  <button type="button" data-step="-1">−</button>
+                  <input type="text" name="stock_{{.ID}}" value="{{qty .Stock}}" inputmode="decimal"
+                         min="0" style="width:100%">
+                  <button type="button" data-step="1">+</button>
+                </div>
+                <div class="small {{if not .InStock}}stock-out{{else if .IsLowStock}}stock-low{{else}}muted{{end}}"
+                     style="margin-top:4px">{{.Unit}}</div>
+              </div>
+            </td>
+            <td class="num muted" data-label="Себест.">{{money .Cost}}</td>
+            <td class="num" data-label="Сумма"><strong>{{money .StockValue}}</strong></td>
+          </tr>
+          {{end}}
+        </tbody>
+      </table>
+    </div>
+    <div style="padding:18px 22px 0;border-top:1px solid var(--a-line);margin-top:8px;
+                display:flex;gap:12px;align-items:center;flex-wrap:wrap">
+      <button class="btn btn-primary" type="submit">Сохранить остатки</button>
+      <span class="small muted">Изменения применятся только к тем строкам, где цифра поменялась.</span>
+    </div>
+    {{else}}
+    <div class="empty" style="padding:44px 20px">
+      <div class="empty-icon">📦</div>
+      <h3>Склад пуст</h3>
+      <p>Сначала добавьте товары.</p>
+    </div>
+    {{end}}
+  </div>
+</form>
+{{end}}

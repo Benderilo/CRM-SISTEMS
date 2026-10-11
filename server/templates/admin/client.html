@@ -1,0 +1,158 @@
+{{define "content"}}
+{{$c := .Data.C}}
+<div class="page-head">
+  <div>
+    <p class="small muted" style="margin:0 0 4px"><a href="/admin/clients">← Все клиенты</a></p>
+    <h1>{{$c.FullName}}</h1>
+    <p>{{phone $c.Phone}} · с нами с {{dateStr $c.CreatedAt}}</p>
+    {{if $c.Blocked}}<p><span class="chip chip-canceled">Заблокирован — не может войти и заказать</span></p>{{end}}
+    {{if $c.Archived}}<p><span class="chip">В архиве</span></p>{{end}}
+  </div>
+</div>
+
+<div class="tiles">
+  <div class="tile accent">
+    <div class="k">Сумма покупок</div>
+    <div class="v">{{money .Data.Total}}</div>
+  </div>
+  <div class="tile">
+    <div class="k">Заказов</div>
+    <div class="v">{{.Data.Count}}</div>
+  </div>
+  <div class="tile">
+    <div class="k">Средний чек</div>
+    <div class="v">{{money .Data.Avg}}</div>
+  </div>
+</div>
+
+<div class="grid2">
+  <div>
+    <div class="abox abox-flush">
+      <h3>История заказов</h3>
+      {{if .Data.Orders}}
+      <div class="table-scroll">
+        <table class="data">
+          <thead>
+            <tr><th>Заказ</th><th>Дата</th><th>Получение</th>
+                <th class="num">Сумма</th><th>Статус</th></tr>
+          </thead>
+          <tbody>
+            {{range .Data.Orders}}
+            <tr>
+              <td><a href="/admin/orders/{{.ID}}"><strong>{{.Number}}</strong></a></td>
+              <td style="white-space:nowrap" data-label="Дата">{{.CreatedStr}}</td>
+              <td class="small" data-label="Получение">{{.Delivery}}</td>
+              <td class="num" data-label="Сумма"><strong>{{money .Total}}</strong></td>
+              <td data-label="Статус"><span class="chip chip-{{.StatusSlug}}">{{.StatusName}}</span></td>
+            </tr>
+            {{end}}
+          </tbody>
+        </table>
+      </div>
+      {{else}}
+      <p class="muted" style="padding:0 22px">Заказов ещё не было.</p>
+      {{end}}
+    </div>
+  </div>
+
+  <div>
+    <form method="post" action="/admin/clients/{{$c.ID}}">
+      <div class="abox">
+        <h3>Карточка клиента</h3>
+        <div class="field">
+          <label for="last_name">Фамилия</label>
+          <input type="text" id="last_name" name="last_name" value="{{$c.LastName}}">
+        </div>
+        <div class="field">
+          <label for="first_name">Имя</label>
+          <input type="text" id="first_name" name="first_name" value="{{$c.FirstName}}">
+        </div>
+        <div class="field">
+          <label for="middle_name">Отчество</label>
+          <input type="text" id="middle_name" name="middle_name" value="{{$c.MiddleName}}">
+        </div>
+        <div class="field">
+          <label for="phone">Телефон (логин)</label>
+          <input type="tel" id="phone" name="phone" value="{{phone $c.Phone}}" data-phone>
+        </div>
+        <div class="field">
+          <label for="email">Почта</label>
+          <input type="email" id="email" name="email" value="{{$c.Email}}">
+        </div>
+        <div class="field">
+          <label for="address">Адрес</label>
+          <input type="text" id="address" name="address" value="{{$c.Address}}">
+        </div>
+        <div class="field">
+          <label for="segment">Сегмент</label>
+          <select id="segment" name="segment">
+            {{range .Data.Segments}}
+            <option value="{{.}}" {{if eq . $c.Segment}}selected{{end}}>{{.}}</option>
+            {{end}}
+          </select>
+        </div>
+        <div class="field">
+          <label for="note">Заметка</label>
+          <textarea id="note" name="note" placeholder="Предпочтения, договорённости…">{{$c.Note}}</textarea>
+        </div>
+        <label class="check" style="margin-bottom:16px">
+          <input type="checkbox" name="archived" value="1" {{if $c.Archived}}checked{{end}}>
+          В архиве
+        </label>
+        <button class="btn btn-primary btn-block" type="submit">Сохранить</button>
+      </div>
+    </form>
+
+    <div class="abox">
+      <h3>Доступ к сайту</h3>
+      <ul class="spec" style="margin:0 0 12px">
+        <li><span>Откуда пришёл</span><span>{{if $c.Source}}{{$c.Source}}{{else}}—{{end}}</span></li>
+        <li><span>Может войти на сайт</span>
+          <span>{{if $c.Blocked}}нет, заблокирован{{else if $c.PasswordHash}}да{{else}}нет, пароль не задан{{end}}</span></li>
+      </ul>
+      {{if $c.Blocked}}
+      <form method="post" action="/admin/clients/{{$c.ID}}/block">
+        <input type="hidden" name="blocked" value="0">
+        <button class="btn btn-outline btn-sm btn-block" type="submit">Разблокировать</button>
+      </form>
+      {{else}}
+      <form method="post" action="/admin/clients/{{$c.ID}}/block"
+            onsubmit="return confirm('Заблокировать {{$c.FullName}}? Вход и заказы на сайте станут недоступны.')">
+        <input type="hidden" name="blocked" value="1">
+        <button class="btn btn-outline btn-sm btn-block" type="submit">Заблокировать</button>
+      </form>
+      {{end}}
+      <p class="small muted" style="margin:12px 0 0">
+        Заблокированный покупатель не может войти в профиль и оформить заказ на сайте.
+      </p>
+    </div>
+
+    <div class="abox">
+      <h3>Забыл пароль</h3>
+      <p class="small muted" style="margin:0 0 12px">
+        Покупатель звонит — вы задаёте ему новый пароль и диктуете по телефону.
+        Оставьте поле пустым, и пароль придумается сам. Открытые сессии на сайте
+        при этом закроются.
+      </p>
+      <form method="post" action="/admin/clients/{{$c.ID}}/password">
+        <div class="field">
+          <label for="newpwd">Новый пароль</label>
+          <input type="text" id="newpwd" name="password" placeholder="можно не заполнять"
+                 autocomplete="off">
+        </div>
+        <button class="btn btn-outline btn-sm btn-block" type="submit">Задать пароль</button>
+      </form>
+    </div>
+
+    <div class="abox">
+      <h3>Опасная зона</h3>
+      <p class="small muted">Удаление стирает карточку клиента. Его заказы остаются —
+        в них сохранены имя и телефон.</p>
+      <form method="post" action="/admin/clients/{{$c.ID}}/delete"
+            onsubmit="return confirm('Удалить клиента «{{$c.FullName}}» без возможности восстановления?')">
+        <button class="btn btn-danger btn-sm btn-block" type="submit">Удалить клиента</button>
+      </form>
+    </div>
+  </div>
+</div>
+{{end}}

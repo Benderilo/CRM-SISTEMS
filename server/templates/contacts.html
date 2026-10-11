@@ -1,0 +1,44 @@
+{{define "content"}}
+{{/* Все тексты этой страницы правятся в приложении: бургер-меню → «Контакты». */}}
+<section class="section">
+  <div class="wrap" style="max-width:820px">
+    <h1>Контакты и доставка</h1>
+
+    <div class="panel" style="margin-top:26px">
+      <h3>Как связаться</h3>
+      <ul class="spec" style="margin-bottom:0">
+        <li><span>Телефон</span><span><a href="tel:{{.Site.PhoneLink}}">{{.Site.Phone}}</a></span></li>
+        <li><span>Часы работы</span><span>{{.Site.Hours}}</span></li>
+        {{if .Site.Email}}
+        <li><span>Почта</span><span><a href="mailto:{{.Site.Email}}">{{.Site.Email}}</a></span></li>
+        {{end}}
+      </ul>
+    </div>
+
+    {{if .Site.DeliveryLines}}
+    <div class="panel">
+      <h3>Доставка</h3>
+      {{range .Site.DeliveryLines}}<p>{{.}}</p>{{end}}
+    </div>
+    {{end}}
+
+    {{if .Site.PayLines}}
+    <div class="panel">
+      <h3>Оплата</h3>
+      {{range .Site.PayLines}}<p>{{.}}</p>{{end}}
+    </div>
+    {{end}}
+
+    {{if .Site.AboutLines}}
+    <div class="panel">
+      <h3>О продукции</h3>
+      {{range .Site.AboutLines}}<p>{{.}}</p>{{end}}
+    </div>
+    {{end}}
+
+    <div style="text-align:center;margin-top:30px">
+      <a class="btn btn-primary" href="/catalog">Перейти в каталог</a>
+    </div>
+  </div>
+</section>
+{{end}}

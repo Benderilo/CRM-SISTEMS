@@ -1,0 +1,125 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <!-- База по-прежнему живёт на телефоне, а интернет нужен для обмена
+         с сайтом магазина: товары, клиенты и заказы синхронизируются. -->
+    <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+    <!-- Сообщения о заказах, оформленных покупателями на сайте. -->
+    <uses-permission android:name="android.permission.POST_NOTIFICATIONS" />
+
+    <queries>
+        <intent>
+            <action android:name="android.intent.action.DIAL" />
+        </intent>
+        <intent>
+            <action android:name="android.intent.action.SENDTO" />
+            <data android:scheme="mailto" />
+        </intent>
+    </queries>
+
+    <application
+        android:name=".CrmApp"
+        android:allowBackup="true"
+        android:dataExtractionRules="@xml/data_extraction_rules"
+        android:fullBackupContent="@xml/backup_rules"
+        android:icon="@mipmap/ic_launcher"
+        android:label="@string/app_name"
+        android:localeConfig="@xml/locales_config"
+        android:roundIcon="@mipmap/ic_launcher_round"
+        android:supportsRtl="true"
+        android:theme="@style/Theme.CRMSistems"
+        android:usesCleartextTraffic="true"
+        tools:targetApi="31">
+
+        <activity
+            android:name=".ui.splash.SplashActivity"
+            android:exported="true"
+            android:theme="@style/Theme.CRMSistems.Splash">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+
+        <!-- singleTop: нажатие на уведомление о заказе возвращает в уже открытое
+             приложение, а не поднимает второй экземпляр главного экрана. -->
+        <activity
+            android:name=".MainActivity"
+            android:exported="false"
+            android:launchMode="singleTop"
+            android:windowSoftInputMode="adjustResize" />
+
+        <activity
+            android:name=".ui.products.ProductEditorActivity"
+            android:exported="false"
+            android:windowSoftInputMode="adjustResize" />
+        <activity
+            android:name=".ui.products.ProductDetailActivity"
+            android:exported="false" />
+        <activity
+            android:name=".ui.clients.ClientEditorActivity"
+            android:exported="false"
+            android:windowSoftInputMode="adjustResize" />
+        <activity
+            android:name=".ui.clients.ClientDetailActivity"
+            android:exported="false" />
+        <activity
+            android:name=".ui.sales.SaleEditorActivity"
+            android:exported="false"
+            android:windowSoftInputMode="adjustResize" />
+        <activity
+            android:name=".ui.sales.OrderEditorActivity"
+            android:exported="false"
+            android:windowSoftInputMode="adjustResize" />
+        <activity
+            android:name=".ui.settings.SettingsActivity"
+            android:exported="false"
+            android:windowSoftInputMode="adjustResize" />
+        <activity
+            android:name=".ui.sync.ServerSettingsActivity"
+            android:exported="false"
+            android:windowSoftInputMode="adjustResize" />
+        <activity
+            android:name=".ui.sync.AdminPasswordActivity"
+            android:exported="false"
+            android:windowSoftInputMode="adjustResize" />
+        <activity
+            android:name=".ui.site.SiteContentActivity"
+            android:exported="false"
+            android:windowSoftInputMode="adjustResize" />
+        <activity
+            android:name=".ui.site.ShopBrowserActivity"
+            android:exported="false"
+            android:configChanges="orientation|screenSize|keyboardHidden|screenLayout|smallestScreenSize|density|uiMode"
+            android:windowSoftInputMode="adjustResize" />
+        <activity
+            android:name=".ui.bot.BotSettingsActivity"
+            android:exported="false"
+            android:windowSoftInputMode="adjustResize" />
+        <activity
+            android:name=".ui.week.WeekPickActivity"
+            android:exported="false" />
+        <activity
+            android:name=".ui.week.WeekClientDetailActivity"
+            android:exported="false" />
+        <activity
+            android:name=".ui.orders.OrdersActivity"
+            android:exported="false" />
+        <activity
+            android:name=".ui.orders.OrderDetailActivity"
+            android:exported="false" />
+        <!-- Установка идёт минуты: поворот экрана не должен её перезапускать. -->
+        <activity
+            android:name=".ui.deploy.DeployActivity"
+            android:configChanges="orientation|screenSize|screenLayout|keyboardHidden"
+            android:exported="false"
+            android:windowSoftInputMode="adjustResize" />
+        <activity
+            android:name=".ui.shops.ShopsActivity"
+            android:exported="false" />
+    </application>
+
+</manifest>

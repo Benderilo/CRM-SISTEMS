@@ -1,0 +1,96 @@
+<?xml version="1.0" encoding="utf-8"?>
+<com.google.android.material.card.MaterialCardView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/card"
+    style="@style/Widget.Crm.Card"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:clickable="true"
+    android:focusable="true">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:padding="12dp">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center_vertical"
+            android:orientation="horizontal">
+
+            <!-- Весь заказ собран: ставит галочки на все товары клиента и
+                 встаёт сама, когда их отметили по одному. -->
+            <com.google.android.material.checkbox.MaterialCheckBox
+                android:id="@+id/packed"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="-8dp"
+                android:contentDescription="@string/week_packed_order" />
+
+            <LinearLayout
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:orientation="vertical">
+
+                <TextView
+                    android:id="@+id/title"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:ellipsize="end"
+                    android:maxLines="1"
+                    android:textAppearance="?attr/textAppearanceTitleSmall"
+                    android:textStyle="bold"
+                    tools:text="Петров Иван" />
+
+                <!-- Телефона здесь нет: он на кнопке внизу. Адрес обычным
+                     цветом текста, как в списке клиентов, — собирая заказ,
+                     на него смотрят, а не скользят взглядом. -->
+                <TextView
+                    android:id="@+id/address"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:ellipsize="end"
+                    android:maxLines="2"
+                    android:textAppearance="?attr/textAppearanceBodyMedium"
+                    android:textColor="?attr/colorOnSurface"
+                    tools:text="ул. Ленина, 12" />
+
+                <TextView
+                    android:id="@+id/segment"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="4dp"
+                    android:background="@drawable/shape_rounded_variant"
+                    android:paddingStart="8dp"
+                    android:paddingTop="2dp"
+                    android:paddingEnd="8dp"
+                    android:paddingBottom="2dp"
+                    android:textAppearance="?attr/textAppearanceLabelSmall"
+                    tools:text="VIP" />
+            </LinearLayout>
+
+            <TextView
+                android:id="@+id/total"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="12dp"
+                android:textAppearance="?attr/textAppearanceTitleSmall"
+                android:textStyle="bold"
+                tools:text="2 440 ₽" />
+        </LinearLayout>
+
+        <!-- Звонок тому, чей заказ собирают: уточнить состав или сказать,
+             что готово. Кнопка та же, что в заказах и клиентах. -->
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/call"
+            style="@style/Widget.Crm.CallButton"
+            android:layout_width="match_parent"
+            android:layout_height="48dp"
+            android:layout_marginTop="10dp"
+            tools:text="Позвонить +7 (912) 000-11-22" />
+    </LinearLayout>
+</com.google.android.material.card.MaterialCardView>

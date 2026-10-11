@@ -1,0 +1,78 @@
+{{define "content"}}
+{{$o := .Data.Order}}
+<section class="section">
+  <div class="wrap" style="max-width:820px">
+
+    {{if .Data.New}}
+    <div class="panel" style="text-align:center;background:linear-gradient(155deg,#fff9f0,#fdf1e4);border-color:var(--cream-deep)">
+      <div style="font-size:52px;line-height:1">🥟</div>
+      {{if .Data.Merged}}
+      <h1 style="margin:12px 0 8px">Добавили в ваш заказ {{$o.Number}}</h1>
+      <p class="lead" style="margin:0">
+        У вас уже был открытый заказ — товары и сумма ниже указаны вместе с ним.
+        Мы перезвоним на {{phone $o.Phone}} для подтверждения.
+      </p>
+      {{else}}
+      <h1 style="margin:12px 0 8px">Заказ принят!</h1>
+      <p class="lead" style="margin:0">
+        Спасибо. Мы перезвоним на {{phone $o.Phone}} для подтверждения.
+      </p>
+      {{end}}
+      {{if not $.Client}}
+      <p style="margin:20px 0 0;font-size:14px;color:var(--muted)">
+        Чтобы видеть историю заказов, <a href="/register">заведите кабинет</a> — нужен только телефон и пароль.
+      </p>
+      {{end}}
+    </div>
+    {{end}}
+
+    <div class="panel" style="margin-top:20px">
+      <div style="display:flex;justify-content:space-between;align-items:flex-start;gap:16px;flex-wrap:wrap">
+        <div>
+          <h2 style="margin-bottom:4px">Заказ {{$o.Number}}</h2>
+          <p style="color:var(--muted);margin:0">от {{$o.CreatedStr}}</p>
+        </div>
+        <span class="chip chip-{{$o.StatusSlug}}">{{$o.StatusName}}</span>
+      </div>
+
+      <div style="margin-top:24px">
+        {{range $o.Items}}
+        <div class="cart-line">
+          <div class="cart-thumb">
+            {{if .Image}}<img src="{{.Image}}" alt="{{.Name}}">
+            {{else}}<span class="ph">{{initial .Name}}</span>{{end}}
+          </div>
+          <div class="cart-line-main">
+            <div class="cart-line-name">{{.Name}}</div>
+            <div class="cart-line-meta">{{qty .Qty}} {{.Unit}} × {{money .UnitPrice}}</div>
+          </div>
+          <div class="cart-line-sum">{{money .Sum}}</div>
+        </div>
+        {{end}}
+      </div>
+
+      <div class="summary-row total">
+        <span>Итого</span><span>{{money $o.Total}}</span>
+      </div>
+    </div>
+
+    <div class="panel">
+      <h3>Данные заказа</h3>
+      <ul class="spec" style="margin-bottom:0">
+        <li><span>Получатель</span><span>{{$o.ClientName}}</span></li>
+        <li><span>Телефон</span><span>{{phone $o.Phone}}</span></li>
+        {{if $o.Email}}<li><span>Почта</span><span>{{$o.Email}}</span></li>{{end}}
+        <li><span>Способ получения</span><span>{{$o.Delivery}}</span></li>
+        {{if $o.Address}}<li><span>Адрес</span><span>{{$o.Address}}</span></li>{{end}}
+        <li><span>Оплата</span><span>{{$o.PayMethod}}</span></li>
+        {{if $o.Comment}}<li><span>Комментарий</span><span>{{$o.Comment}}</span></li>{{end}}
+      </ul>
+    </div>
+
+    <div style="text-align:center;margin-top:26px;display:flex;gap:12px;justify-content:center;flex-wrap:wrap">
+      <a class="btn btn-primary" href="/catalog">Заказать ещё</a>
+      {{if $.Client}}<a class="btn btn-outline" href="/profile">Мои заказы</a>{{end}}
+    </div>
+  </div>
+</section>
+{{end}}

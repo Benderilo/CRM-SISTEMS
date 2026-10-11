@@ -1,0 +1,280 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/root"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="?android:attr/colorBackground"
+    android:orientation="vertical">
+
+    <include
+        android:id="@+id/appbarInc"
+        layout="@layout/view_toolbar" />
+
+    <androidx.core.widget.NestedScrollView
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:paddingBottom="24dp">
+
+            <!-- Шапка красится по сегменту клиента: VIP видно, не читая подпись. -->
+            <com.google.android.material.card.MaterialCardView
+                android:id="@+id/headerCard"
+                style="@style/Widget.Crm.Card"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    android:padding="16dp">
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:gravity="center_vertical"
+                        android:orientation="horizontal">
+
+                        <FrameLayout
+                            android:layout_width="72dp"
+                            android:layout_height="72dp">
+
+                            <TextView
+                                android:id="@+id/initials"
+                                android:layout_width="match_parent"
+                                android:layout_height="match_parent"
+                                android:background="@drawable/shape_circle"
+                                android:gravity="center"
+                                android:textAppearance="?attr/textAppearanceHeadlineSmall"
+                                android:textColor="?attr/colorOnPrimaryContainer"
+                                android:textStyle="bold" />
+
+                            <com.google.android.material.imageview.ShapeableImageView
+                                android:id="@+id/photo"
+                                android:layout_width="match_parent"
+                                android:layout_height="match_parent"
+                                android:contentDescription="@string/client_card"
+                                android:scaleType="centerCrop"
+                                android:visibility="gone"
+                                app:shapeAppearanceOverlay="@style/ShapeAppearance.Crm.Circle" />
+                        </FrameLayout>
+
+                        <LinearLayout
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="12dp"
+                            android:layout_weight="1"
+                            android:orientation="vertical">
+
+                            <TextView
+                                android:id="@+id/name"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:textAppearance="?attr/textAppearanceTitleLarge"
+                                android:textStyle="bold" />
+
+                            <TextView
+                                android:id="@+id/subtitle"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:textAppearance="?attr/textAppearanceBodySmall"
+                                android:textColor="?attr/colorOnSurfaceVariant" />
+                        </LinearLayout>
+                    </LinearLayout>
+
+                    <!-- Первое, что делают с карточкой клиента, — звонят ему.
+                         Кнопка такая же, как в заказе: крупная, зелёная и с
+                         номером прямо на ней, чтобы не искать его глазами. -->
+                    <com.google.android.material.button.MaterialButton
+                        android:id="@+id/call"
+                        style="@style/Widget.Crm.CallButton"
+                        android:layout_width="match_parent"
+                        android:layout_height="56dp"
+                        android:layout_marginTop="12dp"
+                        tools:text="Позвонить +7 (912) 000-11-22" />
+
+                    <com.google.android.material.button.MaterialButton
+                        android:id="@+id/mail"
+                        style="@style/Widget.Material3.Button.TonalButton"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="8dp"
+                        android:text="@string/client_mail"
+                        app:icon="@drawable/ic_mail" />
+
+                    <!-- Покупатель забыл пароль от кабинета на сайте — почты и
+                         СМС у магазина нет, поэтому новый пароль задаёт продавец
+                         прямо во время звонка. -->
+                    <com.google.android.material.button.MaterialButton
+                        android:id="@+id/password"
+                        style="@style/Widget.Material3.Button.OutlinedButton"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="8dp"
+                        android:text="@string/client_password_action"
+                        app:icon="@drawable/ic_key" />
+
+                    <TextView
+                        android:id="@+id/contacts"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="12dp"
+                        android:textAppearance="?attr/textAppearanceBodyMedium" />
+
+                    <TextView
+                        android:id="@+id/note"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="8dp"
+                        android:textAppearance="?attr/textAppearanceBodySmall"
+                        android:textColor="?attr/colorOnSurfaceVariant" />
+                </LinearLayout>
+            </com.google.android.material.card.MaterialCardView>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="8dp"
+                android:layout_marginTop="8dp"
+                android:layout_marginEnd="8dp"
+                android:orientation="horizontal">
+
+                <include
+                    android:id="@+id/statTotal"
+                    layout="@layout/view_stat_tile"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="4dp"
+                    android:layout_weight="1" />
+
+                <include
+                    android:id="@+id/statCount"
+                    layout="@layout/view_stat_tile"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="4dp"
+                    android:layout_weight="1" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="8dp"
+                android:layout_marginEnd="8dp"
+                android:orientation="horizontal">
+
+                <include
+                    android:id="@+id/statAvg"
+                    layout="@layout/view_stat_tile"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="4dp"
+                    android:layout_weight="1" />
+
+                <include
+                    android:id="@+id/statLast"
+                    layout="@layout/view_stat_tile"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="4dp"
+                    android:layout_weight="1" />
+            </LinearLayout>
+
+            <!-- Собираемая продажа: позиции добавляются по одной, как состав
+                 заказа, и сохраняются одной продажей. Пока позиций нет —
+                 карточки не видно. -->
+            <com.google.android.material.card.MaterialCardView
+                android:id="@+id/draftCard"
+                style="@style/Widget.Crm.Card"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:visibility="gone">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    android:padding="16dp">
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="@string/sale_draft_title"
+                        android:textAppearance="@style/TextAppearance.Crm.SectionTitle" />
+
+                    <LinearLayout
+                        android:id="@+id/draftBox"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="4dp"
+                        android:orientation="vertical" />
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="6dp"
+                        android:text="@string/sale_draft_hint"
+                        android:textAppearance="?attr/textAppearanceBodySmall"
+                        android:textColor="?attr/colorOnSurfaceVariant" />
+                </LinearLayout>
+            </com.google.android.material.card.MaterialCardView>
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="16dp"
+                android:layout_marginTop="16dp"
+                android:text="Покупки клиента"
+                android:textAppearance="@style/TextAppearance.Crm.SectionTitle" />
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/salesList"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:nestedScrollingEnabled="false" />
+
+            <TextView
+                android:id="@+id/salesEmpty"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:padding="16dp"
+                android:text="@string/sales_empty"
+                android:textColor="?attr/colorOnSurfaceVariant" />
+        </LinearLayout>
+    </androidx.core.widget.NestedScrollView>
+
+    <LinearLayout
+        android:id="@+id/bottomBar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="?attr/colorSurface"
+        android:elevation="8dp"
+        android:orientation="vertical"
+        android:padding="12dp">
+
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/addItem"
+            style="@style/Widget.Material3.Button.TonalButton"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/order_item_add"
+            app:icon="@drawable/ic_add" />
+
+        <!-- Появляется, когда в продаже есть хоть одна позиция. -->
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/saveSale"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:text="@string/sale_draft_save"
+            android:visibility="gone"
+            app:icon="@drawable/ic_check" />
+    </LinearLayout>
+</LinearLayout>

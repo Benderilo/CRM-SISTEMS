@@ -1,0 +1,130 @@
+{{define "content"}}
+{{$c := .Client}}
+<section class="section">
+  <div class="wrap">
+    <div class="section-head">
+      <div>
+        <h1 style="margin-bottom:4px">Личный кабинет</h1>
+        <p>{{$c.FullName}} · {{phone $c.Phone}}</p>
+      </div>
+      <form method="post" action="/logout">
+        <button class="btn btn-outline btn-sm" type="submit">Выйти</button>
+      </form>
+    </div>
+
+
+    <div class="cart-layout">
+      <div>
+        <div class="panel">
+          <h3>Мои заказы</h3>
+          {{if .Data.Orders}}
+          <div class="table-scroll">
+            <table class="data">
+              <thead>
+                <tr>
+                  <th>Заказ</th><th>Дата</th><th>Состав</th>
+                  <th class="num">Сумма</th><th>Статус</th>
+                </tr>
+              </thead>
+              <tbody>
+                {{range .Data.Orders}}
+                <tr>
+                  <td><a href="/order/{{.ID}}"><strong>{{.Number}}</strong></a></td>
+                  <td style="white-space:nowrap" data-label="Дата">{{.CreatedStr}}</td>
+                  <td style="color:var(--muted);font-size:13.5px" data-label="Состав">
+                    <div>{{range $i, $it := .Items}}{{if $i}}, {{end}}{{$it.Name}}{{end}}</div>
+                  </td>
+                  <td class="num" data-label="Сумма"><strong>{{money .Total}}</strong></td>
+                  <td data-label="Статус"><span class="chip chip-{{.StatusSlug}}">{{.StatusName}}</span></td>
+                </tr>
+                {{end}}
+              </tbody>
+            </table>
+          </div>
+          {{else}}
+          <div class="empty" style="padding:40px 20px">
+            <div class="empty-icon">📦</div>
+            <h3>Заказов пока нет</h3>
+            <p>Как только оформите первый — он появится здесь.</p>
+            <p style="margin-top:18px"><a class="btn btn-primary btn-sm" href="/catalog">В каталог</a></p>
+          </div>
+          {{end}}
+        </div>
+
+        <div class="panel">
+          <h3>Мои данные</h3>
+          <form method="post" action="/profile">
+            <div class="field">
+              <label for="last_name">Фамилия</label>
+              <input type="text" id="last_name" name="last_name" value="{{$c.LastName}}">
+            </div>
+            <div class="field-row">
+              <div class="field">
+                <label for="first_name">Имя</label>
+                <input type="text" id="first_name" name="first_name" value="{{$c.FirstName}}">
+              </div>
+              <div class="field">
+                <label for="middle_name">Отчество</label>
+                <input type="text" id="middle_name" name="middle_name" value="{{$c.MiddleName}}">
+              </div>
+            </div>
+            <div class="field">
+              <label>Телефон (логин)</label>
+              <input type="tel" value="{{phone $c.Phone}}" disabled
+                     style="background:var(--cream);color:var(--muted)">
+              <div class="hint">Чтобы сменить номер — напишите нам</div>
+            </div>
+            <div class="field">
+              <label for="email">Почта</label>
+              <input type="email" id="email" name="email" value="{{$c.Email}}" placeholder="name@mail.ru">
+            </div>
+            <div class="field">
+              <label for="address">Адрес доставки</label>
+              <input type="text" id="address" name="address" value="{{$c.Address}}"
+                     placeholder="Улица, дом, квартира">
+            </div>
+
+            <hr style="border:0;border-top:1px solid var(--line);margin:24px 0">
+            <p style="font-size:13.5px;color:var(--muted);margin-top:0">
+              Смена пароля — заполните оба поля, иначе пароль останется прежним.
+            </p>
+            <div class="field-row">
+              <div class="field">
+                <label for="password">Новый пароль</label>
+                <input type="password" id="password" name="password" autocomplete="new-password">
+              </div>
+              <div class="field">
+                <label for="password2">Повторите</label>
+                <input type="password" id="password2" name="password2" autocomplete="new-password">
+              </div>
+            </div>
+
+            <button class="btn btn-primary" type="submit">Сохранить</button>
+          </form>
+        </div>
+      </div>
+
+      <div class="sticky">
+        <div class="panel" style="text-align:center">
+          <div style="width:74px;height:74px;margin:0 auto 14px;border-radius:50%;
+                      background:linear-gradient(150deg,var(--brand),var(--brand-deep));
+                      color:#fff;display:grid;place-items:center;
+                      font-family:var(--serif);font-size:28px;font-weight:700">
+            {{$c.Initials}}
+          </div>
+          <h3 style="margin-bottom:2px">{{$c.ShortName}}</h3>
+          <p style="color:var(--muted);font-size:14px;margin:0 0 20px">{{phone $c.Phone}}</p>
+
+          <div class="summary-row"><span>Заказов</span><span><strong>{{.Data.Count}}</strong></span></div>
+          <div class="summary-row"><span>На сумму</span><span><strong>{{money .Data.Total}}</strong></span></div>
+          {{if $c.Segment}}
+          <div class="summary-row"><span>Статус</span><span>{{$c.Segment}}</span></div>
+          {{end}}
+
+          <a class="btn btn-primary btn-block" href="/catalog" style="margin-top:18px">Сделать заказ</a>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+{{end}}

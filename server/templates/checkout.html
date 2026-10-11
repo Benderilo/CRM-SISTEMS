@@ -1,0 +1,136 @@
+{{define "content"}}
+{{$f := .Data.Form}}{{$e := .Data.Errors}}
+<section class="section">
+  <div class="wrap">
+    <h1>Оформление заказа</h1>
+
+    {{if .Error}}<div class="alert alert-err">{{.Error}}</div>{{end}}
+    {{if not .Client}}
+    <div class="alert alert-ok">
+      Уже заказывали у нас? <a href="/login?next=/checkout">Войдите</a> — данные подставятся сами.
+    </div>
+    {{end}}
+
+    <form method="post" action="/checkout">
+      <div class="cart-layout">
+        <div>
+          <div class="panel">
+            <h3>Получатель</h3>
+            <div class="field-row-3">
+              <div class="field">
+                <label for="last_name">Фамилия</label>
+                <input type="text" id="last_name" name="last_name" value="{{$f.LastName}}" autocomplete="family-name">
+              </div>
+              <div class="field">
+                <label for="first_name">Имя *</label>
+                <input type="text" id="first_name" name="first_name" value="{{$f.FirstName}}"
+                       class="{{if index $e "first_name"}}bad{{end}}" autocomplete="given-name" required>
+                {{with index $e "first_name"}}<div class="err">{{.}}</div>{{end}}
+              </div>
+              <div class="field">
+                <label for="middle_name">Отчество</label>
+                <input type="text" id="middle_name" name="middle_name" value="{{$f.MiddleName}}">
+              </div>
+            </div>
+
+            <div class="field-row">
+              <div class="field">
+                <label for="phone">Телефон *</label>
+                <input type="tel" id="phone" name="phone" value="{{$f.Phone}}" data-phone
+                       class="{{if index $e "phone"}}bad{{end}}"
+                       placeholder="+7 (999) 123-45-67" autocomplete="tel" required>
+                {{with index $e "phone"}}<div class="err">{{.}}</div>{{end}}
+              </div>
+              <div class="field">
+                <label for="email">Почта</label>
+                <input type="email" id="email" name="email" value="{{$f.Email}}"
+                       placeholder="name@mail.ru" autocomplete="email">
+              </div>
+            </div>
+          </div>
+
+          <div class="panel">
+            <h3>Доставка</h3>
+            <div class="radio-cards" style="margin-bottom:18px">
+              <!-- Условия доставки не пишем здесь руками: они лежат в текстах
+                   сайта («Доставка и оплата») и правятся из приложения, —
+                   иначе на витрине и в оформлении оказывались бы разные обещания. -->
+              <label class="radio-card">
+                <input type="radio" name="delivery" value="Доставка" data-delivery
+                       {{if ne $f.Delivery "Самовывоз"}}checked{{end}}>
+                <span><strong>Доставка</strong><br>
+                  <span style="font-size:13.5px;color:var(--muted)">
+                    {{range $.Site.DeliveryLines}}{{.}} {{end}}
+                  </span>
+                </span>
+              </label>
+              <label class="radio-card">
+                <input type="radio" name="delivery" value="Самовывоз" data-delivery
+                       {{if eq $f.Delivery "Самовывоз"}}checked{{end}}>
+                <span><strong>Самовывоз</strong><br>
+                  <span style="font-size:13.5px;color:var(--muted)">Согласование по телефону.</span>
+                </span>
+              </label>
+            </div>
+
+            <div class="field" data-address-field>
+              <label for="address">Адрес доставки *</label>
+              <input type="text" id="address" name="address" value="{{$f.Address}}"
+                     class="{{if index $e "address"}}bad{{end}}"
+                     placeholder="Улица, дом, квартира, этаж" autocomplete="street-address">
+              {{with index $e "address"}}<div class="err">{{.}}</div>{{end}}
+            </div>
+
+            <h3 style="margin-top:26px">Оплата</h3>
+            <div class="radio-cards">
+              <label class="radio-card">
+                <input type="radio" name="pay_method" value="Наличные при получении"
+                       {{if ne $f.PayMethod "Картой при получении"}}checked{{end}}>
+                <span>Наличными при получении</span>
+              </label>
+              <label class="radio-card">
+                <input type="radio" name="pay_method" value="Картой при получении"
+                       {{if eq $f.PayMethod "Картой при получении"}}checked{{end}}>
+                <span>Картой при получении</span>
+              </label>
+            </div>
+
+            <div class="field" style="margin-top:22px">
+              <label for="comment">Комментарий к заказу</label>
+              <textarea id="comment" name="comment" placeholder="Пожелания по времени, составу, упаковке…">{{$f.Comment}}</textarea>
+            </div>
+          </div>
+        </div>
+
+        <div class="sticky">
+          <div class="panel">
+            <h3>Ваш заказ</h3>
+            {{range .Data.Cart.Lines}}
+            <div class="summary-row" style="align-items:flex-start">
+              <span style="flex:1;padding-right:12px">
+                {{.Product.Title}}<br>
+                <span style="font-size:13px;color:var(--muted)">{{qty .Qty}} {{.Product.Unit}} × {{money .Product.Price}}</span>
+              </span>
+              <span style="white-space:nowrap;font-weight:600">{{money .Sum}}</span>
+            </div>
+            {{end}}
+            <div class="summary-row total">
+              <span>Итого</span><span>{{money .Data.Cart.Total}}</span>
+            </div>
+            <button class="btn btn-primary btn-block" type="submit" style="margin-top:18px">
+              Подтвердить заказ
+            </button>
+            <p style="font-size:12.5px;color:var(--muted);text-align:center;margin:14px 0 0">
+              Нажимая кнопку, вы соглашаетесь на обработку персональных данных.
+              Мы перезвоним для подтверждения.
+            </p>
+          </div>
+          <div style="text-align:center;margin-top:16px">
+            <a href="/cart" style="font-size:14px">← Вернуться в корзину</a>
+          </div>
+        </div>
+      </div>
+    </form>
+  </div>
+</section>
+{{end}}

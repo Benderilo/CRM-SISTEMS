@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="utf-8"?><!--
+     Приложение русское: все тексты лежат в values/ без переводов. Объявляем
+     это явно, чтобы календарь, названия месяцев и дней недели не приезжали
+     на языке телефона.
+-->
+<locale-config xmlns:android="http://schemas.android.com/apk/res/android">
+    <locale android:name="ru" />
+</locale-config>

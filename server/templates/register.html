@@ -1,0 +1,80 @@
+{{define "content"}}
+{{$f := .Data.Form}}{{$e := .Data.Errors}}
+<section class="section">
+  <div class="wrap auth-page" style="max-width:560px">
+    <div class="panel">
+      <h1 style="text-align:center;margin-bottom:6px">Регистрация</h1>
+      <p style="text-align:center;color:var(--muted);margin-bottom:26px">
+        Нужен только телефон и пароль — остальное можно заполнить потом
+      </p>
+
+      {{if .Error}}<div class="alert alert-err">{{.Error}}</div>{{end}}
+
+      <form method="post" action="/register">
+        <div class="field">
+          <label for="phone">Телефон *</label>
+          <input type="tel" id="phone" name="phone" value="{{$f.Phone}}" data-phone
+                 class="{{if index $e "phone"}}bad{{end}}"
+                 placeholder="+7 (999) 123-45-67" autocomplete="tel" required autofocus>
+          {{with index $e "phone"}}<div class="err">{{.}}</div>{{else}}
+          <div class="hint">Он же будет вашим логином</div>{{end}}
+        </div>
+
+        <div class="field-row">
+          <div class="field">
+            <label for="password">Пароль *</label>
+            <input type="password" id="password" name="password"
+                   class="{{if index $e "password"}}bad{{end}}"
+                   autocomplete="new-password" required>
+            {{with index $e "password"}}<div class="err">{{.}}</div>{{else}}
+            <div class="hint">Минимум 5 символов</div>{{end}}
+          </div>
+          <div class="field">
+            <label for="password2">Повторите пароль *</label>
+            <input type="password" id="password2" name="password2"
+                   class="{{if index $e "password2"}}bad{{end}}"
+                   autocomplete="new-password" required>
+            {{with index $e "password2"}}<div class="err">{{.}}</div>{{end}}
+          </div>
+        </div>
+
+        <hr style="border:0;border-top:1px solid var(--line);margin:24px 0">
+
+        <div class="field">
+          <label for="last_name">Фамилия</label>
+          <input type="text" id="last_name" name="last_name" value="{{$f.LastName}}" autocomplete="family-name">
+        </div>
+        <div class="field-row">
+          <div class="field">
+            <label for="first_name">Имя *</label>
+            <input type="text" id="first_name" name="first_name" value="{{$f.FirstName}}"
+                   class="{{if index $e "first_name"}}bad{{end}}" autocomplete="given-name" required>
+            {{with index $e "first_name"}}<div class="err">{{.}}</div>{{end}}
+          </div>
+          <div class="field">
+            <label for="middle_name">Отчество</label>
+            <input type="text" id="middle_name" name="middle_name" value="{{$f.MiddleName}}">
+          </div>
+        </div>
+        <div class="field">
+          <label for="email">Почта</label>
+          <input type="email" id="email" name="email" value="{{$f.Email}}"
+                 placeholder="name@mail.ru" autocomplete="email">
+        </div>
+        <div class="field">
+          <label for="address">Адрес доставки</label>
+          <input type="text" id="address" name="address" value="{{$f.Address}}"
+                 placeholder="Улица, дом, квартира" autocomplete="street-address">
+          <div class="hint">Подставим при оформлении заказа</div>
+        </div>
+
+        <button class="btn btn-primary btn-block" type="submit">Создать аккаунт</button>
+      </form>
+
+      <p style="text-align:center;margin:22px 0 0;font-size:14.5px">
+        Уже зарегистрированы? <a href="/login">Войти</a>
+      </p>
+    </div>
+  </div>
+</section>
+{{end}}

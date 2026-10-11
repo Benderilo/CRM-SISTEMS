@@ -1,0 +1,92 @@
+{{define "content"}}
+<section class="section">
+  <div class="wrap">
+    <h1>Корзина</h1>
+
+    {{if .Data.Empty}}
+    <div class="empty">
+      <div class="empty-icon">🧺</div>
+      <h3>В корзине пока пусто</h3>
+      <p>Выберите что-нибудь в каталоге — там всё свежее.</p>
+      <p style="margin-top:22px"><a class="btn btn-primary" href="/catalog">Перейти в каталог</a></p>
+    </div>
+    {{else}}
+
+    <!-- Вся корзина — одна форма: покупатель правит сразу все количества,
+         а «Оформить заказ» сначала сохраняет их и только потом ведёт дальше. -->
+    <form method="post" action="/cart/update" data-cart>
+    <!-- Первая кнопка формы — та, что срабатывает по Enter в поле количества.
+         Пусть это будет безобидный пересчёт, а не «Убрать» первой строки. -->
+    <button type="submit" class="sr-only" tabindex="-1" aria-hidden="true">Пересчитать</button>
+    <div class="cart-layout">
+      <div class="panel">
+        {{range .Data.Lines}}
+        <div class="cart-line" data-line data-price="{{.Product.Price}}">
+          <a class="cart-thumb" href="/product/{{.Product.ID}}">
+            {{if .Product.Image}}<img src="{{.Product.Image}}" alt="{{.Product.Title}}">
+            {{else}}<span class="ph">{{initial .Product.Name}}</span>{{end}}
+          </a>
+
+          <div class="cart-line-main">
+            <div class="cart-line-name">
+              <a href="/product/{{.Product.ID}}" style="color:var(--ink)">{{.Product.Title}}</a>
+            </div>
+            <div class="cart-line-meta">{{money .Product.Price}} за {{.Product.Unit}}</div>
+
+            <div class="cart-line-qty">
+              <div class="qty-input" data-qty>
+                <button type="button" data-step="-{{qty .Product.Step}}">−</button>
+                <!-- Только целые, как и на карточке товара. -->
+                <input type="number" name="qty_{{.Product.ID}}" value="{{qty .Qty}}"
+                       inputmode="numeric" step="1" min="{{qty .Product.MinQty}}"
+                       data-min="{{qty .Product.MinQty}}" data-step="{{qty .Product.Step}}"
+                       aria-label="Количество, {{.Product.Unit}}">
+                <button type="button" data-step="{{qty .Product.Step}}">+</button>
+              </div>
+              <span class="cart-line-unit">{{.Product.Unit}}</span>
+              <!-- Имя кнопки не «qty_…»: иначе браузер отправил бы и число из
+                   поля, и значение кнопки, а сервер взял бы первое. -->
+              <button class="btn btn-danger btn-sm" type="submit" name="remove"
+                      value="{{.Product.ID}}">Убрать</button>
+            </div>
+          </div>
+
+          <div class="cart-line-sum" data-line-sum>{{money .Sum}}</div>
+        </div>
+        {{end}}
+
+        <div class="cart-tools">
+          <button class="btn btn-outline btn-sm" type="submit">Пересчитать</button>
+          <a href="/catalog">← Добавить ещё товары</a>
+        </div>
+      </div>
+
+      <div class="sticky">
+        <div class="panel">
+          <h3>Итого</h3>
+          <div class="summary-row">
+            <span>Позиций</span><span>{{.Data.Count}}</span>
+          </div>
+          <div class="summary-row">
+            <span>Доставка</span><span>по договорённости</span>
+          </div>
+          <div class="summary-row total">
+            <span>К оплате</span><span data-cart-total>{{money .Data.Total}}</span>
+          </div>
+          <button class="btn btn-primary btn-block" type="submit" name="go" value="checkout"
+                  style="margin-top:18px">Оформить заказ</button>
+          <p style="font-size:13px;color:var(--muted);text-align:center;margin:14px 0 0">
+            {{if .Client}}Вы вошли как {{.Client.ShortName}}{{else}}
+            Можно оформить без регистрации — или <a href="/login?next=/checkout">войти</a>{{end}}
+          </p>
+        </div>
+        <div style="text-align:center;margin-top:16px">
+          <a href="/catalog" style="font-size:14px">← Продолжить покупки</a>
+        </div>
+      </div>
+    </div>
+    </form>
+    {{end}}
+  </div>
+</section>
+{{end}}

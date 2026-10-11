@@ -1,0 +1,27 @@
+{
+  "version": "0.0.1",
+  "configurations": [
+    {
+      "name": "crmshop",
+      "runtimeExecutable": "go",
+      "runtimeArgs": [
+        "run",
+        "-C",
+        "server",
+        ".",
+        "-addr",
+        "127.0.0.1:8097",
+        "-db",
+        "./data/dev.db",
+        "-uploads",
+        "./data/uploads",
+        "-admin-pass",
+        "dev12345",
+        "-api-key",
+        "dev12345",
+        "-insecure-cookies"
+      ],
+      "port": 8097
+    }
+  ]
+}

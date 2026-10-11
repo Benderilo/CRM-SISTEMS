@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Покупатель в окне «кто заказал этот товар»: галочка «положили», имя и сколько взял. -->
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:paddingStart="12dp"
+    android:paddingTop="4dp"
+    android:paddingEnd="12dp"
+    android:paddingBottom="4dp">
+
+    <com.google.android.material.card.MaterialCardView
+        android:id="@+id/card"
+        style="@style/Widget.Crm.Card"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="0dp"
+        android:layout_marginTop="0dp"
+        android:layout_marginEnd="0dp"
+        android:duplicateParentState="true">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center_vertical"
+            android:orientation="horizontal"
+            android:paddingStart="4dp"
+            android:paddingTop="4dp"
+            android:paddingEnd="16dp"
+            android:paddingBottom="4dp">
+
+            <!-- Галочка «положили». Не фокусируемая, иначе строка списка
+                 перестаёт нажиматься и не открывает заказ покупателя. -->
+            <com.google.android.material.checkbox.MaterialCheckBox
+                android:id="@+id/packed"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:contentDescription="@string/week_packed"
+                android:focusable="false" />
+
+            <TextView
+                android:id="@+id/name"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:ellipsize="end"
+                android:maxLines="2"
+                android:textAppearance="?attr/textAppearanceTitleSmall"
+                android:textStyle="bold"
+                tools:text="Елена Королева" />
+
+            <TextView
+                android:id="@+id/qty"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="12dp"
+                android:textAppearance="?attr/textAppearanceTitleSmall"
+                android:textStyle="bold"
+                tools:text="1 кг" />
+        </LinearLayout>
+    </com.google.android.material.card.MaterialCardView>
+</FrameLayout>

@@ -1,0 +1,71 @@
+{{define "content"}}
+<div class="page-head">
+  <div>
+    <h1>Заказы</h1>
+    <p>Найдено: {{len .Data.Orders}}</p>
+  </div>
+  <form method="get" action="/admin/orders" style="display:flex;gap:8px">
+    {{if ge .Data.Status 0}}<input type="hidden" name="status" value="{{.Data.Status}}">{{end}}
+    <input type="search" name="q" value="{{.Data.Search}}" placeholder="Имя, телефон или номер…">
+    <button class="btn btn-outline btn-sm" type="submit">Найти</button>
+  </form>
+</div>
+
+<div class="tabs">
+  <a href="/admin/orders" class="{{if lt .Data.Status 0}}on{{end}}">
+    Все <span class="n">{{.Data.All}}</span>
+  </a>
+  {{range $i, $name := statuses}}
+  <a href="/admin/orders?status={{$i}}" class="{{if eq $i $.Data.Status}}on{{end}}">
+    {{$name}} <span class="n">{{index $.Data.Counts $i}}</span>
+  </a>
+  {{end}}
+</div>
+
+<div class="abox abox-flush">
+  {{if .Data.Orders}}
+  <div class="table-scroll">
+    <table class="data">
+      <thead>
+        <tr>
+          <th>Заказ</th><th>Клиент</th><th>Получение</th>
+          <th>Дата</th><th class="num">Сумма</th><th>Статус</th><th></th>
+        </tr>
+      </thead>
+      <tbody>
+        {{range .Data.Orders}}
+        <tr>
+          <td>
+            <a href="/admin/orders/{{.ID}}"><strong>{{.Number}}</strong></a>
+            {{if .FromApp}}<div class="small muted">из приложения</div>{{end}}
+          </td>
+          <td data-label="Клиент">
+            <div>
+              {{if .ClientName}}{{.ClientName}}{{else}}<span class="muted">без имени</span>{{end}}
+              <div class="small muted">{{phone .Phone}}</div>
+            </div>
+          </td>
+          <td class="small" data-label="Получение">
+            <div>
+              {{.Delivery}}
+              {{if .Address}}<div class="muted">{{.Address}}</div>{{end}}
+            </div>
+          </td>
+          <td style="white-space:nowrap" data-label="Дата">{{.CreatedStr}}</td>
+          <td class="num" data-label="Сумма"><strong>{{money .Total}}</strong></td>
+          <td data-label="Статус"><span class="chip chip-{{.StatusSlug}}">{{.StatusName}}</span></td>
+          <td class="num"><a class="btn btn-outline btn-sm" href="/admin/orders/{{.ID}}">Открыть</a></td>
+        </tr>
+        {{end}}
+      </tbody>
+    </table>
+  </div>
+  {{else}}
+  <div class="empty" style="padding:44px 20px">
+    <div class="empty-icon">📋</div>
+    <h3>Заказов не найдено</h3>
+    <p>Здесь появятся заказы с сайта и из приложения.</p>
+  </div>
+  {{end}}
+</div>
+{{end}}

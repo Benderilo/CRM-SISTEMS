@@ -1,0 +1,60 @@
+{{define "content"}}
+{{$p := .Data.Product}}
+<section class="section">
+  <div class="wrap">
+    <p style="font-size:13.5px;color:var(--muted);margin-bottom:22px">
+      <a href="/catalog">Каталог</a>
+      {{if $p.Category}} → <a href="/catalog?cat={{$p.Category}}">{{$p.Category}}</a>{{end}}
+      → {{$p.Title}}
+    </p>
+
+    <div class="product">
+      <div class="product-photo">
+        {{if $p.Image}}<img src="{{$p.Image}}" alt="{{$p.Title}}">
+        {{else}}<span class="ph">{{initial $p.Name}}</span>{{end}}
+      </div>
+
+      <div class="product-info">
+        <h1>{{$p.Title}}</h1>
+        <p class="price-big">{{money $p.Price}} <small>за {{$p.Unit}}</small></p>
+
+        {{if $p.Description}}<p class="lead">{{$p.Description}}</p>{{end}}
+
+        <ul class="spec">
+          {{if $p.Category}}<li><span>Категория</span><span>{{$p.Category}}</span></li>{{end}}
+          <li><span>Единица измерения</span><span>{{$p.Unit}}</span></li>
+          {{if $p.SKU}}<li><span>Артикул</span><span>{{$p.SKU}}</span></li>{{end}}
+        </ul>
+
+        <form method="post" action="/cart/add" class="buy-row" data-add>
+          <input type="hidden" name="id" value="{{$p.ID}}">
+          <input type="hidden" name="back" value="{{$.Path}}">
+          <div class="qty-input" data-qty>
+            <button type="button" data-step="-{{qty $p.Step}}">−</button>
+            <!-- Только целые: заказ набирают штуками и килограммами, дробное
+                 количество продавец проставит сам, если покупатель попросит. -->
+            <input type="number" name="qty" value="1" inputmode="numeric" step="1"
+                   min="{{qty $p.MinQty}}"
+                   data-min="{{qty $p.MinQty}}" data-step="{{qty $p.Step}}" aria-label="Количество">
+            <button type="button" data-step="{{qty $p.Step}}">+</button>
+          </div>
+          <button class="btn btn-primary" type="submit">Добавить в корзину</button>
+        </form>
+        {{$in := index $.CartQty $p.ID}}
+        <p class="card-incart" data-incart data-for="{{$p.ID}}" {{if not $in}}hidden{{end}}>
+          В корзине <b data-incart-qty>{{qty $in}}</b> {{$p.Unit}} · <a href="/cart">изменить</a>
+        </p>
+      </div>
+    </div>
+
+    {{if .Data.Similar}}
+    <div class="section-head" style="margin-top:60px">
+      <div><h2>Из этой же категории</h2></div>
+    </div>
+    <div class="grid">
+      {{range .Data.Similar}}{{template "productcard" card . $}}{{end}}
+    </div>
+    {{end}}
+  </div>
+</section>
+{{end}}

@@ -1,0 +1,119 @@
+{{define "content"}}
+{{$s := .Data.Stats}}
+<div class="page-head">
+  <div>
+    <h1>Сводка</h1>
+    <p>Всё, что происходит в магазине, одним экраном</p>
+  </div>
+  <a class="btn btn-primary btn-sm" href="/admin/products/new">+ Новый товар</a>
+</div>
+
+<div class="tiles">
+  <div class="tile accent">
+    <div class="k">Выручка</div>
+    <div class="v">{{money $s.Revenue}}</div>
+    <div class="s">прибыль {{money $s.Profit}}</div>
+  </div>
+  <div class="tile">
+    <div class="k">Заказов</div>
+    <div class="v">{{$s.OrdersTotal}}</div>
+    <div class="s">средний чек {{money $s.AvgCheck}}</div>
+  </div>
+  <div class="tile {{if $s.OrdersNew}}warn{{end}}">
+    <div class="k">Новых</div>
+    <div class="v">{{$s.OrdersNew}}</div>
+    <div class="s">{{if $s.OrdersNew}}ждут обработки{{else}}всё разобрано{{end}}</div>
+  </div>
+  <div class="tile">
+    <div class="k">Клиентов</div>
+    <div class="v">{{$s.Clients}}</div>
+    <div class="s">зарегистрировано</div>
+  </div>
+  <div class="tile">
+    <div class="k">Склад</div>
+    <div class="v">{{money $s.StockValue}}</div>
+    <div class="s">{{$s.Products}} позиций по себестоимости</div>
+  </div>
+  <div class="tile {{if $s.LowStock}}warn{{end}}">
+    <div class="k">Заканчивается</div>
+    <div class="v">{{$s.LowStock}}</div>
+    <div class="s">{{if $s.LowStock}}пора докупить{{else}}остатки в норме{{end}}</div>
+  </div>
+</div>
+
+<div class="grid2">
+  <div>
+    <div class="abox abox-flush">
+      <h3 class="abox-head">
+        Последние заказы
+        <a class="btn btn-outline btn-sm" href="/admin/orders">Все заказы</a>
+      </h3>
+      {{if .Data.Recent}}
+      <div class="table-scroll">
+        <table class="data">
+          <thead>
+            <tr><th>Заказ</th><th>Клиент</th><th>Дата</th><th class="num">Сумма</th><th>Статус</th></tr>
+          </thead>
+          <tbody>
+            {{range .Data.Recent}}
+            <tr>
+              <td><a href="/admin/orders/{{.ID}}"><strong>{{.Number}}</strong></a></td>
+              <td data-label="Клиент">
+                <div>
+                  {{if .ClientName}}{{.ClientName}}{{else}}<span class="muted">без имени</span>{{end}}
+                  <div class="small muted">{{phone .Phone}}</div>
+                </div>
+              </td>
+              <td style="white-space:nowrap" data-label="Дата">{{.CreatedStr}}</td>
+              <td class="num" data-label="Сумма"><strong>{{money .Total}}</strong></td>
+              <td data-label="Статус"><span class="chip chip-{{.StatusSlug}}">{{.StatusName}}</span></td>
+            </tr>
+            {{end}}
+          </tbody>
+        </table>
+      </div>
+      {{else}}
+      <p class="muted" style="padding:0 22px">Заказов пока нет. Как только кто-то оформит заказ на сайте — он появится здесь.</p>
+      {{end}}
+    </div>
+  </div>
+
+  <div>
+    <div class="abox">
+      <h3>Топ товаров</h3>
+      {{if .Data.Top}}
+      <div class="rank">
+        {{range .Data.Top}}
+        <div class="rank-row">
+          <span class="rank-name">{{.Name}}</span>
+          <span class="rank-val">{{money .Sum}}</span>
+          <span class="rank-bar">
+            <i style="width:{{if $.Data.MaxSum}}{{pct .Sum $.Data.MaxSum}}{{else}}0{{end}}%"></i>
+          </span>
+        </div>
+        {{end}}
+      </div>
+      {{else}}
+      <p class="muted small">Данных пока нет — рейтинг появится после первых заказов.</p>
+      {{end}}
+    </div>
+
+    <div class="abox">
+      <h3>Заканчивается на складе</h3>
+      {{if .Data.Low}}
+      {{range .Data.Low}}
+      <div style="display:flex;justify-content:space-between;gap:12px;padding:9px 0;border-bottom:1px solid var(--a-line)">
+        <a href="/admin/products/{{.ID}}" style="font-size:14px">{{.Title}}</a>
+        <span class="{{if .InStock}}stock-low{{else}}stock-out{{end}}" style="white-space:nowrap">
+          {{qty .Stock}} {{.Unit}}
+        </span>
+      </div>
+      {{end}}
+      <a class="btn btn-outline btn-sm btn-block" href="/admin/stock" style="margin-top:14px">Открыть склад</a>
+      {{else}}
+      <p class="muted small">Все остатки выше минимума.</p>
+      {{end}}
+    </div>
+  </div>
+</div>
+{{end}}
